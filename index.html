@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <title>Skything</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
@@ -63,17 +62,32 @@
     }
 
     .tagline-container {
-      font-size: 0.85rem;
-      font-weight: 300;
       opacity: 0;
-      letter-spacing: 0.5px;
       transition: opacity 0.6s ease-in-out;
-      min-height: 1.2rem;
+      min-height: 3rem;
     }
 
     .tagline-container.show {
-      opacity: 0.5;
+      opacity: 1;
     }
+
+    .line1 {
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+
+    .line2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .color-0 { color: #3fdad8; }
+    .color-1 { color: #6e8efb; }
+    .color-2 { color: #a993fe; }
+    .color-3 { color: #5ee7df; }
+    .color-4 { color: #84fab0; }
+
   </style>
 </head>
 <body>
@@ -108,8 +122,13 @@
 
     function showNextTagline() {
       container.classList.remove('show');
+
       setTimeout(() => {
-        container.textContent = `${taglines[i]}\nSmile, you did the Skything`;
+        const colorClass = `color-${i % 5}`;
+        container.innerHTML = `
+          <div class="line1 ${colorClass}">${taglines[i]}</div>
+          <div class="line2 ${colorClass}">Smile, you did the Skything</div>
+        `;
         container.classList.add('show');
         i = (i + 1) % taglines.length;
       }, 600);
@@ -117,8 +136,8 @@
 
     // Initial render
     showNextTagline();
-    // Cycle every 3.5 seconds (including fade timing)
-    setInterval(showNextTagline, 3500);
+    // Cycle every 2.6 seconds (2s visible + 0.6s transition)
+    setInterval(showNextTagline, 2600);
   </script>
 
 </body>
