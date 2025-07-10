@@ -12,7 +12,7 @@
       padding: 0 1rem;
       font-family: 'Inter', sans-serif;
       background-color: #0d1117;
-      color: #ffffff;
+      color: #e6e6e6;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -23,17 +23,18 @@
     }
 
     h1 {
-      font-size: 4rem;
+      font-size: 3.5rem;
       font-weight: 600;
       margin: 0.5rem 0;
       letter-spacing: -0.5px;
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 300;
       margin: 0;
       letter-spacing: 0.5px;
+      opacity: 0.8;
     }
 
     .spacer {
@@ -48,14 +49,14 @@
     }
 
     .cta-bold {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       margin-top: 2.5rem;
       letter-spacing: 0.5px;
     }
 
     .cta-skinny {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 300;
       opacity: 0.8;
       margin-top: 0.4rem;
@@ -64,73 +65,52 @@
 
     .tagline-container {
       min-height: 6rem;
-      position: relative;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 400;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .line1,
-    .line2,
-    .smile,
-    .scroll {
+    .fade-line {
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
     }
 
-    .line1.show {
+    .fade-line.show {
       opacity: 1;
-      animation: fadeIn 0.6s ease forwards;
     }
 
-    .line2.show {
-      opacity: 1;
-      animation: fadeIn 0.6s ease forwards;
-      animation-delay: 0.8s;
-    }
-
-    .smile.show {
-      opacity: 1;
-      font-weight: 600;
-      font-size: 2rem;
+    .smile-line {
+      opacity: 0;
+      font-weight: 500;
+      font-size: 1.4rem;
       display: inline-block;
-      animation: zoomIn 0.6s ease forwards;
-      animation-delay: 1.6s;
+      transform: scale(2);
+      transition: transform 0.6s ease, opacity 0.6s ease;
     }
 
-    .scroll.show {
+    .smile-line.show {
       opacity: 1;
-      font-size: 1.3rem;
+      transform: scale(1);
+    }
+
+    .scroll-line {
+      opacity: 0;
+      font-size: 1.4rem;
       font-weight: 400;
       display: inline-block;
       white-space: nowrap;
-      position: relative;
-      left: -100%;
-      animation: slideIn 0.8s ease-out forwards;
-      animation-delay: 2.3s;
+      transform: translateX(40%);
+      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .scroll-line.show {
+      opacity: 1;
+      transform: translateX(0);
     }
-
-    @keyframes zoomIn {
-      from { transform: scale(3); opacity: 0; }
-      to   { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      0%   { left: -100%; }
-      100% { left: 0; }
-    }
-
-    .color-0 { color: #3fdad8; }
-    .color-1 { color: #6e8efb; }
-    .color-2 { color: #a993fe; }
-    .color-3 { color: #5ee7df; }
-    .color-4 { color: #84fab0; }
-    .eon-orange { color: #ffa657; }
   </style>
 </head>
 <body>
@@ -150,11 +130,11 @@
   <div class="spacer"></div>
 
   <div class="tagline-container">
-    <div class="line1" id="line1"></div>
-    <div class="line2" id="line2"></div>
-    <div style="margin-top: 1.5rem;">
-      <span class="smile" id="smile">Smile</span>
-      <span class="scroll" id="scroll">, you did the Skything</span>
+    <div id="line1" class="fade-line"></div>
+    <div id="line2" class="fade-line"></div>
+    <div style="margin-top: 1.2rem;">
+      <span id="smile" class="smile-line">Smile</span>
+      <span id="scroll" class="scroll-line">, you did the Skything</span>
     </div>
   </div>
 
@@ -167,7 +147,6 @@
       ["Need your data now?", "Can't wait eons to restore?"]
     ];
 
-    const colors = ["color-0", "color-1", "color-2", "color-3", "eon-orange"];
     let i = 0;
 
     const line1 = document.getElementById('line1');
@@ -175,35 +154,33 @@
     const smile = document.getElementById('smile');
     const scroll = document.getElementById('scroll');
 
-    function resetAnimations() {
-      line1.className = 'line1';
-      line2.className = 'line2';
-      smile.className = 'smile';
-      scroll.className = 'scroll';
+    function reset() {
+      line1.classList.remove('show');
+      line2.classList.remove('show');
+      smile.classList.remove('show');
+      scroll.classList.remove('show');
+
+      line1.textContent = '';
+      line2.textContent = '';
     }
 
     function showNextSequence() {
-      resetAnimations();
+      reset();
 
-      setTimeout(() => {
-        const color = colors[i % colors.length];
-        const [frag1, frag2] = fragments[i];
-        const isEon = i === fragments.length - 1;
+      const [frag1, frag2] = fragments[i];
+      line1.textContent = frag1;
+      line2.textContent = frag2;
 
-        line1.textContent = frag1;
-        line2.textContent = frag2;
+      setTimeout(() => line1.classList.add('show'), 100);           // fade in line 1
+      setTimeout(() => line2.classList.add('show'), 900);           // fade in line 2
+      setTimeout(() => smile.classList.add('show'), 1800);          // zoom in "Smile"
+      setTimeout(() => scroll.classList.add('show'), 2600);         // scroll in rest
 
-        line1.classList.add('show', isEon ? 'eon-orange' : color);
-        line2.classList.add('show', isEon ? 'eon-orange' : color);
-        smile.classList.add('show', isEon ? 'eon-orange' : color);
-        scroll.classList.add('show', isEon ? 'eon-orange' : color);
-
-        i = (i + 1) % fragments.length;
-      }, 200);
+      i = (i + 1) % fragments.length;
     }
 
     showNextSequence();
-    setInterval(showNextSequence, 6200); // 6.2s full sequence
+    setInterval(showNextSequence, 7000); // total cycle ~7s
   </script>
 
 </body>
