@@ -72,10 +72,6 @@
       font-weight: 600;
       font-size: 1.1rem;
     }
-
-    .visible {
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
@@ -112,17 +108,17 @@
       ],
       [
         "Two single panes of glass?!",
-        "Backup & DR in one place",
+        'Backup <b>&</b> DR in <b>one</b> place',
         "Smile, you did the Skything"
       ],
       [
         "'Wish we knew this two years ago.'",
-        'Tr<span style="color:#3fdad8;">AI</span>n on backups',
+        'Tr<span style="color:#3fdad8;font-weight:600;">ai</span>n on backups',
         "Smile, you did the Skything"
       ],
       [
         "Need your data now?",
-        "Can't wait for eons?",
+        "Can't wait for <span style='color:#ffa657;'>eons</span>?",
         "Smile, you did the Skything"
       ]
     ];
@@ -156,11 +152,11 @@
               line3.classList.remove("visible");
 
               currentIndex = (currentIndex + 1) % taglines.length;
-              setTimeout(showLines, 800); // brief silence before next
-            }, 3000); // wait after line3
-          }, 3000); // wait after line2
-        }, 3000); // wait after line1
-      }, 600); // initial delay for fade out
+              setTimeout(showLines, 800);
+            }, 3000);
+          }, 3000);
+        }, 3000);
+      }, 600);
     }
 
     showLines();
