@@ -69,19 +69,22 @@
     .line1, .line2 {
       opacity: 0;
       transition: opacity 1s ease-in-out;
-      font-weight: 300;
     }
 
-    .line1.show {
-      opacity: 1;
-      font-size: 1.15rem;
+    .line1 {
+      font-size: 1.05rem; /* Slightly smaller to avoid wrapping */
+      font-weight: 300;
       margin-bottom: 0.4rem;
     }
 
-    .line2.show {
-      opacity: 1;
+    .line2 {
       font-size: 1.2rem;
       font-weight: 600;
+    }
+
+    .line1.show,
+    .line2.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -127,20 +130,18 @@
         line1.textContent = taglines[i];
         line1.classList.add('show');
 
-        // After 3s show line 2
         setTimeout(() => {
           line2.classList.add('show');
 
-          // After 4s hide both and move to next
           setTimeout(() => {
             line1.classList.remove('show');
             line2.classList.remove('show');
             i = (i + 1) % taglines.length;
-            setTimeout(animateTagline, 800); // pause before next
+            setTimeout(animateTagline, 800); // brief silence before restart
           }, 4000);
 
         }, 3000);
-      }, 600); // initial fade-in delay
+      }, 600);
     }
 
     animateTagline();
