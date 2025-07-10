@@ -77,6 +77,10 @@
     .tagline-line.visible {
       opacity: 1;
     }
+
+    #line3 {
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -121,27 +125,22 @@
     }
 
     async function showNext() {
-      // Reset
       line1.classList.remove('visible');
       line2.classList.remove('visible');
       line3.classList.remove('visible');
       await delayMs(600);
 
-      // Set and show line 1
       line1.textContent = fragments[i][0];
       line2.textContent = fragments[i][1];
       line1.classList.add('visible');
       await delayMs(delay);
 
-      // Show line 2
       line2.classList.add('visible');
       await delayMs(delay);
 
-      // Show line 3
       line3.classList.add('visible');
       await delayMs(delay);
 
-      // Hide all
       line1.classList.remove('visible');
       line2.classList.remove('visible');
       line3.classList.remove('visible');
