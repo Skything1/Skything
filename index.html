@@ -19,7 +19,6 @@
       align-items: center;
       min-height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
     h1 {
@@ -63,37 +62,20 @@
     }
 
     .tagline-container {
-      min-height: 4.5rem;
-    }
-
-    .line1, .line2 {
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .line1 {
-      font-size: 1.05rem;
-      font-weight: 300;
-      margin-bottom: 0.4rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .line2 {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .line1.show,
-    .line2.show {
       opacity: 1;
+      transition: opacity 0.6s ease-in-out;
+      min-height: 6rem;
     }
 
-    @media (max-width: 480px) {
-      .line1 {
-        font-size: 0.95rem;
-      }
+    .tagline-line {
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+      font-size: 1rem;
+      margin: 0.3rem 0;
+    }
+
+    .tagline-line.visible {
+      opacity: 1;
     }
   </style>
 </head>
@@ -105,7 +87,7 @@
   <div class="spacer"></div>
 
   <div class="subtext">Need to protect all your data on every cloud?</div>
-  <div class="subtext">By tomorrow. No headcount. Wait, what?</div>
+  <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
   <div class="cta-bold">Skything it.</div>
@@ -114,46 +96,62 @@
   <div class="spacer"></div>
 
   <div class="tagline-container">
-    <div id="line1" class="line1"></div>
-    <div id="line2" class="line2">Smile, you did the Skything</div>
+    <div class="tagline-line" id="line1"></div>
+    <div class="tagline-line" id="line2"></div>
+    <div class="tagline-line" id="line3">Smile, you did the Skything</div>
   </div>
 
   <script>
-    const taglines = [
-      "Audit tomorrow, data on three clouds, 'fix this!'",
-      "'Show me the data, now!', dead data in backups?",
-      "Two single panes of glass?! Backup & DR in one place",
-      "'Wish we knew this two years ago'. Train on backups",
-      "Need your data now and can't wait eons to restore?"
+    const fragments = [
+      ["Audit tomorrow, data on three clouds?", '"Fix this!"'],
+      ["'Show me the data, now!'", "Dead data in backups?"],
+      ["Two single panes of glass?!", "Backup & DR in one place"],
+      ["'Wish we knew this two years ago'", "Train on backups"],
+      ["Need your data now?", "Can’t wait for eons?"]
     ];
 
+    let i = 0;
     const line1 = document.getElementById('line1');
     const line2 = document.getElementById('line2');
-    let i = 0;
+    const line3 = document.getElementById('line3');
+    const delay = 3000;
 
-    function animateTagline() {
-      line1.classList.remove('show');
-      line2.classList.remove('show');
-
-      setTimeout(() => {
-        line1.textContent = taglines[i];
-        line1.classList.add('show');
-
-        setTimeout(() => {
-          line2.classList.add('show');
-
-          setTimeout(() => {
-            line1.classList.remove('show');
-            line2.classList.remove('show');
-            i = (i + 1) % taglines.length;
-            setTimeout(animateTagline, 800); // pause before next
-          }, 4000); // wait before fade out
-
-        }, 3000); // delay before showing second line
-      }, 600); // fade in
+    async function delayMs(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    animateTagline();
+    async function showNext() {
+      // Reset
+      line1.classList.remove('visible');
+      line2.classList.remove('visible');
+      line3.classList.remove('visible');
+      await delayMs(600);
+
+      // Set and show line 1
+      line1.textContent = fragments[i][0];
+      line2.textContent = fragments[i][1];
+      line1.classList.add('visible');
+      await delayMs(delay);
+
+      // Show line 2
+      line2.classList.add('visible');
+      await delayMs(delay);
+
+      // Show line 3
+      line3.classList.add('visible');
+      await delayMs(delay);
+
+      // Hide all
+      line1.classList.remove('visible');
+      line2.classList.remove('visible');
+      line3.classList.remove('visible');
+      await delayMs(600);
+
+      i = (i + 1) % fragments.length;
+      showNext();
+    }
+
+    showNext();
   </script>
 
 </body>
