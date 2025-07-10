@@ -72,7 +72,7 @@
     }
 
     .line1 {
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 300;
       margin-bottom: 0.4rem;
       white-space: nowrap;
@@ -92,7 +92,7 @@
 
     @media (max-width: 480px) {
       .line1 {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -147,10 +147,10 @@
             line2.classList.remove('show');
             i = (i + 1) % taglines.length;
             setTimeout(animateTagline, 800); // pause before next
-          }, 4000);
+          }, 4000); // wait before fade out
 
-        }, 3000);
-      }, 600);
+        }, 3000); // delay before showing second line
+      }, 600); // fade in
     }
 
     animateTagline();
