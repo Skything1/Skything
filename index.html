@@ -19,6 +19,7 @@
       align-items: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
@@ -62,32 +63,26 @@
     }
 
     .tagline-container {
+      min-height: 4.5rem;
+    }
+
+    .line1, .line2 {
       opacity: 0;
-      transition: opacity 0.6s ease-in-out;
-      min-height: 3rem;
-    }
-
-    .tagline-container.show {
-      opacity: 1;
-    }
-
-    .line1 {
-      font-size: 0.9rem;
+      transition: opacity 1s ease-in-out;
       font-weight: 300;
-      margin-bottom: 0.3rem;
     }
 
-    .line2 {
-      font-size: 1rem;
+    .line1.show {
+      opacity: 1;
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .line2.show {
+      opacity: 1;
+      font-size: 1.2rem;
       font-weight: 600;
     }
-
-    .color-0 { color: #3fdad8; }
-    .color-1 { color: #6e8efb; }
-    .color-2 { color: #a993fe; }
-    .color-3 { color: #5ee7df; }
-    .color-4 { color: #84fab0; }
-    .eon-orange { color: #ffa657; }
   </style>
 </head>
 <body>
@@ -98,7 +93,7 @@
   <div class="spacer"></div>
 
   <div class="subtext">Need to protect all your data on every cloud?</div>
-  <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
+  <div class="subtext">By tomorrow. No headcount. Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
   <div class="cta-bold">Skything it.</div>
@@ -106,7 +101,10 @@
 
   <div class="spacer"></div>
 
-  <div class="tagline-container" id="tagline"></div>
+  <div class="tagline-container">
+    <div id="line1" class="line1"></div>
+    <div id="line2" class="line2">Smile, you did the Skything</div>
+  </div>
 
   <script>
     const taglines = [
@@ -117,27 +115,35 @@
       "Need your data now and can't wait eons to restore?"
     ];
 
-    const container = document.getElementById('tagline');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
     let i = 0;
 
-    function showNextTagline() {
-      container.classList.remove('show');
+    function animateTagline() {
+      line1.classList.remove('show');
+      line2.classList.remove('show');
 
       setTimeout(() => {
-        const isEon = i === taglines.length - 1;
-        const colorClass = isEon ? 'eon-orange' : `color-${i % 5}`;
+        line1.textContent = taglines[i];
+        line1.classList.add('show');
 
-        container.innerHTML = `
-          <div class="line1 ${colorClass}">${taglines[i]}</div>
-          <div class="line2 ${colorClass}">Smile, you did the Skything</div>
-        `;
-        container.classList.add('show');
-        i = (i + 1) % taglines.length;
-      }, 600);
+        // After 3s show line 2
+        setTimeout(() => {
+          line2.classList.add('show');
+
+          // After 4s hide both and move to next
+          setTimeout(() => {
+            line1.classList.remove('show');
+            line2.classList.remove('show');
+            i = (i + 1) % taglines.length;
+            setTimeout(animateTagline, 800); // pause before next
+          }, 4000);
+
+        }, 3000);
+      }, 600); // initial fade-in delay
     }
 
-    showNextTagline();
-    setInterval(showNextTagline, 4600); // 4s total: 3.4s visible + 0.6s fade
+    animateTagline();
   </script>
 
 </body>
