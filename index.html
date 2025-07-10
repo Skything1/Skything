@@ -41,7 +41,7 @@
       height: 2rem;
     }
 
-    .subtext, .cta-bold, .cta-skinny {
+    .subtext {
       font-size: 1rem;
       font-weight: 300;
       opacity: 0.85;
@@ -49,34 +49,44 @@
     }
 
     .cta-bold {
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-skinny {
+      font-size: 1rem;
+      font-weight: 300;
+      opacity: 0.8;
+      margin-top: 0.4rem;
+      margin-bottom: 4rem;
     }
 
     .tagline-container {
       min-height: 4rem;
-      position: relative;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 400;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
 
-    .fragment {
+    .tagline-message {
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.8s ease-in-out;
       position: absolute;
     }
 
-    .fragment.show {
+    .tagline-message.show {
       opacity: 1;
     }
 
     .footer-line {
-      margin-top: 2rem;
-      font-size: 1rem;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
       font-weight: 400;
       opacity: 0.7;
     }
@@ -99,12 +109,12 @@
   <div class="spacer"></div>
 
   <div class="tagline-container">
-    <div id="tagline" class="fragment"></div>
+    <div id="tagline" class="tagline-message"></div>
     <div class="footer-line">Smile, you did the Skything</div>
   </div>
 
   <script>
-    const fragments = [
+    const taglines = [
       "Audit now, data on three clouds.",
       "'Show me the data, now!'",
       "Dead data in backups?",
@@ -119,17 +129,17 @@
     let i = 0;
     const tagline = document.getElementById('tagline');
 
-    function showFragment() {
+    function showNextTagline() {
       tagline.classList.remove('show');
       setTimeout(() => {
-        tagline.textContent = fragments[i];
+        tagline.textContent = taglines[i];
         tagline.classList.add('show');
-        i = (i + 1) % fragments.length;
-      }, 600);  // brief silence between fade out and next fade in
+        i = (i + 1) % taglines.length;
+      }, 400); // clean gap before next message fades in
     }
 
-    showFragment();
-    setInterval(showFragment, 4600);  // 4s show + 0.6s silence
+    showNextTagline();
+    setInterval(showNextTagline, 4000); // total 4s per message
   </script>
 
 </body>
