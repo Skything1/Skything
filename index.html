@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  
   <title>Skything</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
@@ -38,7 +37,7 @@
     }
 
     .spacer {
-      height: 6rem;
+      height: 4rem;
     }
 
     .subtext {
@@ -60,20 +59,25 @@
       font-weight: 300;
       opacity: 0.8;
       margin-top: 0.4rem;
-      margin-bottom: 6rem;
+      margin-bottom: 4rem;
     }
 
-    .tagline {
+    .tagline-container {
       font-size: 0.85rem;
       font-weight: 300;
-      opacity: 0.5;
+      opacity: 0;
       letter-spacing: 0.5px;
+      transition: opacity 0.6s ease-in-out;
+      min-height: 1.2rem;
+    }
+
+    .tagline-container.show {
+      opacity: 0.5;
     }
   </style>
 </head>
 <body>
 
-  
   <h1>Skything</h1>
   <h2>Sky wide data protection</h2>
 
@@ -83,39 +87,39 @@
   <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
-  
-  
   <div class="cta-bold">Skything it.</div>
   <div class="cta-skinny">Now, not eons</div>
 
-
-
-  <div class="spacer"></div>
-    
-  <div class="tagline">Audit tomorrow, data on three clouds, 'fix this!'</div>
-  <div class="tagline">Smile, you did the Skything</div>
-
   <div class="spacer"></div>
 
-  <div class="tagline">'Show me the data, now!', dead data in backups?</div>
-  <div class="tagline">Smile, you did the Skything</div>
+  <div class="tagline-container" id="tagline"></div>
 
-  <div class="spacer"></div>
+  <script>
+    const taglines = [
+      "Audit tomorrow, data on three clouds, 'fix this!'",
+      "'Show me the data, now!', dead data in backups?",
+      "Two single panes of glass?! Backup & DR in one place",
+      "'Wish we knew this two years ago'. Train on backups",
+      "Need your data now and can't wait eons to restore?"
+    ];
 
-  <div class="tagline">Two single panes of glass?! Backup & DR in one place</div>
-  <div class="tagline">Smile, you did the Skything</div>
+    const container = document.getElementById('tagline');
+    let i = 0;
 
-  <div class="spacer"></div>
+    function showNextTagline() {
+      container.classList.remove('show');
+      setTimeout(() => {
+        container.textContent = `${taglines[i]}\nSmile, you did the Skything`;
+        container.classList.add('show');
+        i = (i + 1) % taglines.length;
+      }, 600);
+    }
 
-  <div class="tagline">'Wish we knew this two years ago'. Train on backups</div>
-  <div class="tagline">Smile, you did the Skything</div>
+    // Initial render
+    showNextTagline();
+    // Cycle every 3.5 seconds (including fade timing)
+    setInterval(showNextTagline, 3500);
+  </script>
 
-    <div class="spacer"></div>
-
-  <div class="tagline">Need your data now and can't wait eons to restore?</div>
-  <div class="tagline">Smile, you did the Skything</div>
-
-  
-  
 </body>
 </html>
