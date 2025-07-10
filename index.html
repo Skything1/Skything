@@ -5,40 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skything</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
 
     body {
       margin: 0;
       padding: 0 1rem;
       font-family: 'Inter', sans-serif;
       background-color: #0d1117;
-      color: #e6e6e6;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 4rem;
       font-weight: 600;
       margin: 0.5rem 0;
       letter-spacing: -0.5px;
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 1.8rem;
       font-weight: 300;
       margin: 0;
       letter-spacing: 0.5px;
-      opacity: 0.8;
     }
 
     .spacer {
-      height: 2rem;
+      height: 4rem;
     }
 
     .subtext {
@@ -64,32 +62,32 @@
     }
 
     .tagline-container {
-      min-height: 4rem;
-      font-size: 1.2rem;
-      font-weight: 400;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .tagline-message {
       opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-      position: absolute;
+      transition: opacity 0.6s ease-in-out;
+      min-height: 3rem;
     }
 
-    .tagline-message.show {
+    .tagline-container.show {
       opacity: 1;
     }
 
-    .footer-line {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      font-weight: 400;
-      opacity: 0.7;
+    .line1 {
+      font-size: 0.9rem;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
     }
+
+    .line2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .color-0 { color: #3fdad8; }
+    .color-1 { color: #6e8efb; }
+    .color-2 { color: #a993fe; }
+    .color-3 { color: #5ee7df; }
+    .color-4 { color: #84fab0; }
+    .eon-orange { color: #ffa657; }
   </style>
 </head>
 <body>
@@ -100,7 +98,7 @@
   <div class="spacer"></div>
 
   <div class="subtext">Need to protect all your data on every cloud?</div>
-  <div class="subtext">By tomorrow. No headcount. Wait, what?</div>
+  <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
   <div class="cta-bold">Skything it.</div>
@@ -108,38 +106,38 @@
 
   <div class="spacer"></div>
 
-  <div class="tagline-container">
-    <div id="tagline" class="tagline-message"></div>
-    <div class="footer-line">Smile, you did the Skything</div>
-  </div>
+  <div class="tagline-container" id="tagline"></div>
 
   <script>
     const taglines = [
-      "Audit now, data on three clouds.",
-      "'Show me the data, now!'",
-      "Dead data in backups?",
-      "Two single panes of glass.",
-      "Backup & DR in one place.",
-      "'Wish we knew this two years ago.'",
-      "Train on backups.",
-      "Need your data now?",
-      "Can't wait eons to restore?"
+      "Audit tomorrow, data on three clouds, 'fix this!'",
+      "'Show me the data, now!', dead data in backups?",
+      "Two single panes of glass?! Backup & DR in one place",
+      "'Wish we knew this two years ago'. Train on backups",
+      "Need your data now and can't wait eons to restore?"
     ];
 
+    const container = document.getElementById('tagline');
     let i = 0;
-    const tagline = document.getElementById('tagline');
 
     function showNextTagline() {
-      tagline.classList.remove('show');
+      container.classList.remove('show');
+
       setTimeout(() => {
-        tagline.textContent = taglines[i];
-        tagline.classList.add('show');
+        const isEon = i === taglines.length - 1;
+        const colorClass = isEon ? 'eon-orange' : `color-${i % 5}`;
+
+        container.innerHTML = `
+          <div class="line1 ${colorClass}">${taglines[i]}</div>
+          <div class="line2 ${colorClass}">Smile, you did the Skything</div>
+        `;
+        container.classList.add('show');
         i = (i + 1) % taglines.length;
-      }, 400); // clean gap before next message fades in
+      }, 600);
     }
 
     showNextTagline();
-    setInterval(showNextTagline, 4000); // total 4s per message
+    setInterval(showNextTagline, 4600); // 4s total: 3.4s visible + 0.6s fade
   </script>
 
 </body>
