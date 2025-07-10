@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skything</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
     body {
       margin: 0;
@@ -19,6 +19,7 @@
       align-items: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
@@ -36,25 +37,25 @@
     }
 
     .spacer {
-      height: 4rem;
+      height: 3rem;
     }
 
     .subtext {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 300;
       opacity: 0.85;
       margin: 0.3rem 0;
     }
 
     .cta-bold {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 600;
       margin-top: 2.5rem;
       letter-spacing: 0.5px;
     }
 
     .cta-skinny {
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 300;
       opacity: 0.8;
       margin-top: 0.4rem;
@@ -62,24 +63,66 @@
     }
 
     .tagline-container {
+      min-height: 6rem;
+      position: relative;
+      font-size: 1.3rem;
+      font-weight: 400;
+      overflow: hidden;
+    }
+
+    .line1,
+    .line2,
+    .smile,
+    .scroll {
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
-      min-height: 3rem;
     }
 
-    .tagline-container.show {
+    .line1.show {
       opacity: 1;
+      animation: fadeIn 0.6s ease forwards;
     }
 
-    .line1 {
-      font-size: 0.9rem;
-      font-weight: 300;
-      margin-bottom: 0.3rem;
+    .line2.show {
+      opacity: 1;
+      animation: fadeIn 0.6s ease forwards;
+      animation-delay: 0.8s;
     }
 
-    .line2 {
-      font-size: 1rem;
+    .smile.show {
+      opacity: 1;
       font-weight: 600;
+      font-size: 2rem;
+      display: inline-block;
+      animation: zoomIn 0.6s ease forwards;
+      animation-delay: 1.6s;
+    }
+
+    .scroll.show {
+      opacity: 1;
+      font-size: 1.3rem;
+      font-weight: 400;
+      display: inline-block;
+      white-space: nowrap;
+      position: relative;
+      left: -100%;
+      animation: slideIn 0.8s ease-out forwards;
+      animation-delay: 2.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(3); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0%   { left: -100%; }
+      100% { left: 0; }
     }
 
     .color-0 { color: #3fdad8; }
@@ -106,38 +149,61 @@
 
   <div class="spacer"></div>
 
-  <div class="tagline-container" id="tagline"></div>
+  <div class="tagline-container">
+    <div class="line1" id="line1"></div>
+    <div class="line2" id="line2"></div>
+    <div style="margin-top: 1.5rem;">
+      <span class="smile" id="smile">Smile</span>
+      <span class="scroll" id="scroll">, you did the Skything</span>
+    </div>
+  </div>
 
   <script>
-    const taglines = [
-      "Audit tomorrow, data on three clouds, 'fix this!'",
-      "'Show me the data, now!', dead data in backups?",
-      "Two single panes of glass?! Backup & DR in one place",
-      "'Wish we knew this two years ago'. Train on backups",
-      "Need your data now and can't wait eons to restore?"
+    const fragments = [
+      ["Audit tomorrow, data on three clouds,", "'fix this!'"],
+      ["'Show me the data, now!'", "Dead data in backups?"],
+      ["Two single panes of glass?!", "Backup & DR in one place."],
+      ["'Wish we knew this two years ago.'", "Train on backups."],
+      ["Need your data now?", "Can't wait eons to restore?"]
     ];
 
-    const container = document.getElementById('tagline');
+    const colors = ["color-0", "color-1", "color-2", "color-3", "eon-orange"];
     let i = 0;
 
-    function showNextTagline() {
-      container.classList.remove('show');
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const smile = document.getElementById('smile');
+    const scroll = document.getElementById('scroll');
 
-      setTimeout(() => {
-        const isEon = i === taglines.length - 1;
-        const colorClass = isEon ? 'eon-orange' : `color-${i % 5}`;
-
-        container.innerHTML = `
-          <div class="line1 ${colorClass}">${taglines[i]}</div>
-          <div class="line2 ${colorClass}">Smile, you did the Skything</div>
-        `;
-        container.classList.add('show');
-        i = (i + 1) % taglines.length;
-      }, 600);
+    function resetAnimations() {
+      line1.className = 'line1';
+      line2.className = 'line2';
+      smile.className = 'smile';
+      scroll.className = 'scroll';
     }
 
-    showNextTagline();
-    setInterval(showNextTagline, 4600); // 4s total: 3.4s visible + 0.6s fade
+    function showNextSequence() {
+      resetAnimations();
+
+      setTimeout(() => {
+        const color = colors[i % colors.length];
+        const [frag1, frag2] = fragments[i];
+        const isEon = i === fragments.length - 1;
+
+        line1.textContent = frag1;
+        line2.textContent = frag2;
+
+        line1.classList.add('show', isEon ? 'eon-orange' : color);
+        line2.classList.add('show', isEon ? 'eon-orange' : color);
+        smile.classList.add('show', isEon ? 'eon-orange' : color);
+        scroll.classList.add('show', isEon ? 'eon-orange' : color);
+
+        i = (i + 1) % fragments.length;
+      }, 200);
+    }
+
+    showNextSequence();
+    setInterval(showNextSequence, 6200); // 6.2s full sequence
   </script>
 
 </body>
