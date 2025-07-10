@@ -61,12 +61,6 @@
       margin-bottom: 4rem;
     }
 
-    .tagline-container {
-      opacity: 1;
-      transition: opacity 0.6s ease-in-out;
-      min-height: 6rem;
-    }
-
     .tagline-line {
       opacity: 0;
       transition: opacity 0.6s ease-in-out;
@@ -74,13 +68,13 @@
       margin: 0.3rem 0;
     }
 
-    .tagline-line.visible {
-      opacity: 1;
+    .tagline-line.bold {
+      font-weight: 600;
+      font-size: 1.1rem;
     }
 
-    #line3 {
-      font-weight: 600;
-      font-size: 1.2rem;
+    .visible {
+      opacity: 1;
     }
   </style>
 </head>
@@ -100,58 +94,76 @@
 
   <div class="spacer"></div>
 
-  <div class="tagline-container">
-    <div class="tagline-line" id="line1"></div>
-    <div class="tagline-line" id="line2"></div>
-    <div class="tagline-line" id="line3">Smile, you did the Skything</div>
-  </div>
+  <div id="line1" class="tagline-line"></div>
+  <div id="line2" class="tagline-line"></div>
+  <div id="line3" class="tagline-line bold"></div>
 
   <script>
-    const fragments = [
-      ["Audit tomorrow, data on three clouds?", '"Fix this!"'],
-      ["'Show me the data, now!'", "Dead data in backups?"],
-      ["Two single panes of glass?!", "Backup & DR in one place"],
-      ["'Wish we knew this two years ago'", "Train on backups"],
-      ["Need your data now?", "Can’t wait for eons?"]
+    const taglines = [
+      [
+        "Audit tomorrow, data on three clouds?",
+        '"Fix this!"',
+        "Smile, you did the Skything"
+      ],
+      [
+        "'Show me the data, now!'",
+        "Dead data in backups?",
+        "Smile, you did the Skything"
+      ],
+      [
+        "Two single panes of glass?!",
+        "Backup & DR in one place",
+        "Smile, you did the Skything"
+      ],
+      [
+        "'Wish we knew this two years ago.'",
+        'Tr<span style="color:#3fdad8;">AI</span>n on backups',
+        "Smile, you did the Skything"
+      ],
+      [
+        "Need your data now?",
+        "Can't wait for eons?",
+        "Smile, you did the Skything"
+      ]
     ];
 
-    let i = 0;
     const line1 = document.getElementById('line1');
     const line2 = document.getElementById('line2');
     const line3 = document.getElementById('line3');
-    const delay = 3000;
 
-    async function delayMs(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+    let currentIndex = 0;
+
+    function showLines() {
+      line1.classList.remove("visible");
+      line2.classList.remove("visible");
+      line3.classList.remove("visible");
+
+      setTimeout(() => {
+        line1.innerHTML = taglines[currentIndex][0];
+        line1.classList.add("visible");
+
+        setTimeout(() => {
+          line2.innerHTML = taglines[currentIndex][1];
+          line2.classList.add("visible");
+
+          setTimeout(() => {
+            line3.innerHTML = taglines[currentIndex][2];
+            line3.classList.add("visible");
+
+            setTimeout(() => {
+              line1.classList.remove("visible");
+              line2.classList.remove("visible");
+              line3.classList.remove("visible");
+
+              currentIndex = (currentIndex + 1) % taglines.length;
+              setTimeout(showLines, 800); // brief silence before next
+            }, 3000); // wait after line3
+          }, 3000); // wait after line2
+        }, 3000); // wait after line1
+      }, 600); // initial delay for fade out
     }
 
-    async function showNext() {
-      line1.classList.remove('visible');
-      line2.classList.remove('visible');
-      line3.classList.remove('visible');
-      await delayMs(600);
-
-      line1.textContent = fragments[i][0];
-      line2.textContent = fragments[i][1];
-      line1.classList.add('visible');
-      await delayMs(delay);
-
-      line2.classList.add('visible');
-      await delayMs(delay);
-
-      line3.classList.add('visible');
-      await delayMs(delay);
-
-      line1.classList.remove('visible');
-      line2.classList.remove('visible');
-      line3.classList.remove('visible');
-      await delayMs(600);
-
-      i = (i + 1) % fragments.length;
-      showNext();
-    }
-
-    showNext();
+    showLines();
   </script>
 
 </body>
