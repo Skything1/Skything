@@ -23,14 +23,14 @@
     }
 
     h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-weight: 600;
       margin: 0.5rem 0;
       letter-spacing: -0.5px;
     }
 
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       font-weight: 300;
       margin: 0;
       letter-spacing: 0.5px;
@@ -38,78 +38,47 @@
     }
 
     .spacer {
-      height: 3rem;
+      height: 2rem;
     }
 
-    .subtext {
-      font-size: 1.05rem;
+    .subtext, .cta-bold, .cta-skinny {
+      font-size: 1rem;
       font-weight: 300;
       opacity: 0.85;
       margin: 0.3rem 0;
     }
 
     .cta-bold {
-      font-size: 1.2rem;
       font-weight: 600;
-      margin-top: 2.5rem;
-      letter-spacing: 0.5px;
-    }
-
-    .cta-skinny {
-      font-size: 1rem;
-      font-weight: 300;
-      opacity: 0.8;
-      margin-top: 0.4rem;
-      margin-bottom: 4rem;
+      margin-top: 2rem;
     }
 
     .tagline-container {
-      min-height: 6rem;
-      font-size: 1.4rem;
+      min-height: 4rem;
+      position: relative;
+      font-size: 1.1rem;
       font-weight: 400;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      position: relative;
+      align-items: center;
     }
 
-    .fade-line {
+    .fragment {
       opacity: 0;
-      transition: opacity 0.6s ease-in-out;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
     }
 
-    .fade-line.show {
+    .fragment.show {
       opacity: 1;
     }
 
-    .smile-line {
-      opacity: 0;
-      font-weight: 500;
-      font-size: 1.4rem;
-      display: inline-block;
-      transform: scale(2);
-      transition: transform 0.6s ease, opacity 0.6s ease;
-    }
-
-    .smile-line.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .scroll-line {
-      opacity: 0;
-      font-size: 1.4rem;
+    .footer-line {
+      margin-top: 2rem;
+      font-size: 1rem;
       font-weight: 400;
-      display: inline-block;
-      white-space: nowrap;
-      transform: translateX(40%);
-      transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-    }
-
-    .scroll-line.show {
-      opacity: 1;
-      transform: translateX(0);
+      opacity: 0.7;
     }
   </style>
 </head>
@@ -121,7 +90,7 @@
   <div class="spacer"></div>
 
   <div class="subtext">Need to protect all your data on every cloud?</div>
-  <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
+  <div class="subtext">By tomorrow. No headcount. Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
   <div class="cta-bold">Skything it.</div>
@@ -130,57 +99,37 @@
   <div class="spacer"></div>
 
   <div class="tagline-container">
-    <div id="line1" class="fade-line"></div>
-    <div id="line2" class="fade-line"></div>
-    <div style="margin-top: 1.2rem;">
-      <span id="smile" class="smile-line">Smile</span>
-      <span id="scroll" class="scroll-line">, you did the Skything</span>
-    </div>
+    <div id="tagline" class="fragment"></div>
+    <div class="footer-line">Smile, you did the Skything</div>
   </div>
 
   <script>
     const fragments = [
-      ["Audit tomorrow, data on three clouds,", "'fix this!'"],
-      ["'Show me the data, now!'", "Dead data in backups?"],
-      ["Two single panes of glass?!", "Backup & DR in one place."],
-      ["'Wish we knew this two years ago.'", "Train on backups."],
-      ["Need your data now?", "Can't wait eons to restore?"]
+      "Audit now, data on three clouds.",
+      "'Show me the data, now!'",
+      "Dead data in backups?",
+      "Two single panes of glass.",
+      "Backup & DR in one place.",
+      "'Wish we knew this two years ago.'",
+      "Train on backups.",
+      "Need your data now?",
+      "Can't wait eons to restore?"
     ];
 
     let i = 0;
+    const tagline = document.getElementById('tagline');
 
-    const line1 = document.getElementById('line1');
-    const line2 = document.getElementById('line2');
-    const smile = document.getElementById('smile');
-    const scroll = document.getElementById('scroll');
-
-    function reset() {
-      line1.classList.remove('show');
-      line2.classList.remove('show');
-      smile.classList.remove('show');
-      scroll.classList.remove('show');
-
-      line1.textContent = '';
-      line2.textContent = '';
+    function showFragment() {
+      tagline.classList.remove('show');
+      setTimeout(() => {
+        tagline.textContent = fragments[i];
+        tagline.classList.add('show');
+        i = (i + 1) % fragments.length;
+      }, 600);  // brief silence between fade out and next fade in
     }
 
-    function showNextSequence() {
-      reset();
-
-      const [frag1, frag2] = fragments[i];
-      line1.textContent = frag1;
-      line2.textContent = frag2;
-
-      setTimeout(() => line1.classList.add('show'), 100);           // fade in line 1
-      setTimeout(() => line2.classList.add('show'), 900);           // fade in line 2
-      setTimeout(() => smile.classList.add('show'), 1800);          // zoom in "Smile"
-      setTimeout(() => scroll.classList.add('show'), 2600);         // scroll in rest
-
-      i = (i + 1) % fragments.length;
-    }
-
-    showNextSequence();
-    setInterval(showNextSequence, 7000); // total cycle ~7s
+    showFragment();
+    setInterval(showFragment, 4600);  // 4s show + 0.6s silence
   </script>
 
 </body>
