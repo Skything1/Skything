@@ -40,47 +40,55 @@
     }
 
     .sparkle-container {
-      margin: 3rem 0;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .sparkle-column {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .sparkle {
+      height: 3rem;
+      width: 3rem;
+      stroke: white;
+      opacity: 0;
+      animation: sparkleFade 6s infinite;
+    }
+
+    .sparkle-large {
       height: 4rem;
+      width: 4rem;
+      animation-delay: 0s;
     }
 
-    .sparkle-svg {
-      width: 3.5rem;
-      height: 3.5rem;
-      stroke: #3fdad8;
-      fill: none;
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      animation: sparkle-fade 6s ease-in-out infinite alternate;
-    }
-
-    .sparkle-small {
-      width: 1.2rem;
-      height: 1.2rem;
-      margin-right: 0.5rem;
+    .sparkle-small:nth-child(1) {
       animation-delay: 1s;
     }
 
-    .sparkle-smaller {
-      width: 0.8rem;
-      height: 0.8rem;
-      margin-right: 1.5rem;
+    .sparkle-small:nth-child(2) {
       animation-delay: 2s;
     }
 
-    @keyframes sparkle-fade {
-      0% { opacity: 0.3; transform: scale(1) rotate(0deg); }
-      50% { opacity: 0.7; transform: scale(1.1) rotate(10deg); }
-      100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
+    @keyframes sparkleFade {
+      0%   { opacity: 0; stroke: cyan; }
+      25%  { opacity: 1; stroke: #a1c4fd; }
+      50%  { opacity: 0.6; stroke: #c2e9fb; }
+      75%  { opacity: 1; stroke: #7af9e3; }
+      100% { opacity: 0; stroke: cyan; }
     }
 
     .spacer {
-      height: 2rem;
+      height: 3rem;
     }
 
     .taglines {
-      margin: 4rem 0 1rem 0;
+      margin: 8rem 0 1rem 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -144,20 +152,21 @@
   <h2>Sky wide data protection</h2>
 
   <div class="sparkle-container">
-    <div style="display: flex; align-items: center; justify-content: center;">
-      <!-- Smaller sparkles -->
-      <svg class="sparkle-svg sparkle-smaller" viewBox="0 0 24 24">
-        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
+    <svg class="sparkle sparkle-large" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2 L13 10 L21 12 L13 14 L12 22 L11 14 L3 12 L11 10 Z" stroke="currentColor" stroke-width="0.8"/>
+    </svg>
+    <div class="sparkle-column">
+      <svg class="sparkle sparkle-small" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 L13 10 L21 12 L13 14 L12 22 L11 14 L3 12 L11 10 Z" stroke="currentColor" stroke-width="0.6"/>
       </svg>
-      <svg class="sparkle-svg sparkle-small" viewBox="0 0 24 24">
-        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
-      </svg>
-      <!-- Main sparkle -->
-      <svg class="sparkle-svg" viewBox="0 0 24 24">
-        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
+      <svg class="sparkle sparkle-small" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2 L13 10 L21 12 L13 14 L12 22 L11 14 L3 12 L11 10 Z" stroke="currentColor" stroke-width="0.6"/>
       </svg>
     </div>
   </div>
+
+  <div class="spacer"></div>
+  <div class="spacer"></div>
 
   <div class="taglines">
     <div id="line1" class="tagline-line"></div>
