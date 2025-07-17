@@ -97,46 +97,33 @@
       transform: scale(1.08);
     }
 
-    footer {
-      position: fixed;
-      bottom: 2.5rem;
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: white;
+    .footer {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 1.2rem;
+      color: #00e0ff;
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: 100%;
-      text-align: center;
-      gap: 0.5rem;
-    }
-
-    .footer-text a {
-      background: linear-gradient(to right, #00ffff, #61dafb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-decoration: none;
+      gap: 0.4rem;
       font-weight: 600;
     }
 
-    .footer-wingdings span {
-      display: inline-block;
-      animation: blink 2s infinite alternate;
+    .footer a {
+      color: #00e0ff;
+      text-decoration: none;
     }
 
-    .footer-wingdings.right span {
-      animation-delay: 1s;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.2; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.05); }
+    .footer span {
+      transition: opacity 0.5s ease;
     }
   </style>
 </head>
 <body>
 
+  <!-- Top-left return link -->
   <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
+
+  <!-- Title -->
   <h1 onclick="location.href='index.html'">Skything</h1>
 
   <div class="nav-links">
@@ -148,23 +135,23 @@
     <a href="#">SkyThingies</a>
   </div>
 
+  <!-- Stars -->
   <div class="stars" id="stars"></div>
 
-  <footer>
-    <div class="footer-wingdings left">
-      <span>💙</span><span>💃</span><span>🧘‍♂️</span><span>🌸</span><span>🕊️</span>
-    </div>
-    <div class="footer-text"><a href="page9.html">Doing the Skything</a></div>
-    <div class="footer-wingdings right">
-      <span>🧘‍♀️</span><span>🙏</span><span>☯️</span><span>🌺</span><span>🕺</span>
-    </div>
-  </footer>
+  <!-- Footer -->
+  <div class="footer">
+    <span id="leftWingding">💙</span>
+    <a href="page9.html">Doing the Skything</a>
+    <span id="rightWingding">🧘‍♂️</span>
+  </div>
 
   <script>
+    // Top left symbol
     const symbols = ['☁️', '🌞', '🕊️'];
-    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-    document.getElementById('symbolLink').textContent = symbol;
+    document.getElementById('symbolLink').textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
 
+    // Stars
     const starsContainer = document.getElementById('stars');
     const numStars = 100;
     for (let i = 0; i < numStars; i++) {
@@ -175,6 +162,22 @@
       star.style.animationDelay = `${Math.random() * 6}s`;
       starsContainer.appendChild(star);
     }
+
+    // Wingding animation
+    const wingdings = ['💙','🧘‍♀️','💃','🙏','☯️','🌸','🧘‍♂️','🕊️','🪷','🪬','🌼','🕉️'];
+    const left = document.getElementById('leftWingding');
+    const right = document.getElementById('rightWingding');
+    let index = 0;
+
+    function updateWingdings() {
+      left.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+      setTimeout(() => {
+        right.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+      }, 500);
+    }
+
+    updateWingdings();
+    setInterval(updateWingdings, 1000);
   </script>
 
 </body>
