@@ -15,9 +15,11 @@
       color: #ffffff;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      text-align: center;
       min-height: 100vh;
+      text-align: center;
+      overflow-x: hidden;
     }
 
     .top-padding {
@@ -38,61 +40,64 @@
       letter-spacing: 0.5px;
     }
 
-    .sparkle-orbit {
+    .sparkle-wrapper {
       position: relative;
-      width: 5rem;
-      height: 5rem;
-      margin-top: 1.2rem;
-      margin-bottom: 0;
-      animation: orbitDance 14s linear infinite;
+      width: 6rem;
+      height: 6rem;
+      margin-top: 1.5rem;
+      margin-bottom: -5rem;
     }
 
     .sparkle {
-      width: 1.5rem;
-      height: 1.5rem;
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform-origin: center;
-      transform: translate(-50%, -50%);
-      background: none;
-    }
-
-    .sparkle::before, .sparkle::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      height: 2px;
+      font-size: 1.4rem;
+      color: white;
+      opacity: 0.7;
+      animation: fade 5s ease-in-out infinite, orbit 10s linear infinite;
       background: linear-gradient(90deg, cyan, #a1c4fd, #c2e9fb, cyan);
-      background-size: 300%;
-      background-position: 0% 0;
-      animation: strobeOutline 6s linear infinite;
-      transform: translate(-50%, -50%) rotate(45deg);
-      opacity: 0.9;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .sparkle::after {
-      transform: translate(-50%, -50%) rotate(-45deg);
+    .sparkle:nth-child(1) {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 0s, 0s;
     }
 
-    .sparkle1 { transform: rotate(0deg) translate(2.2rem) rotate(0deg); }
-    .sparkle2 { transform: rotate(120deg) translate(2.2rem) rotate(-120deg); }
-    .sparkle3 { transform: rotate(240deg) translate(2.2rem) rotate(-240deg); }
-
-    @keyframes orbitDance {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .sparkle:nth-child(2) {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      animation-delay: 0.5s, 2s;
     }
 
-    @keyframes strobeOutline {
-      0% { background-position: 0% 0; }
-      100% { background-position: 300% 0; }
+    .sparkle:nth-child(3) {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      animation-delay: 1s, 4s;
+    }
+
+    @keyframes fade {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(2rem) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(2rem) rotate(-360deg); }
+    }
+
+    .spacer {
+      height: 3rem;
     }
 
     .taglines {
-      margin: 3rem 0 1rem 0;
+      margin-top: 6rem;
+      margin-bottom: 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -155,10 +160,10 @@
   <h1>Skything</h1>
   <h2>Sky wide data protection</h2>
 
-  <div class="sparkle-orbit">
-    <div class="sparkle sparkle1"></div>
-    <div class="sparkle sparkle2"></div>
-    <div class="sparkle sparkle3"></div>
+  <div class="sparkle-wrapper">
+    <div class="sparkle">✦</div>
+    <div class="sparkle">✧</div>
+    <div class="sparkle">❉</div>
   </div>
 
   <div class="taglines">
@@ -168,7 +173,7 @@
   </div>
 
   <div class="strobe-container">
-    <span id="leftIcon" class="strobe-icon">🌈</span>
+    <span id="leftIcon" class="strobe-icon">☁️</span>
     <a class="strobe-link" id="strobeLink" href="page2.html">Do the Skything</a>
     <span id="rightIcon" class="strobe-icon">🛸</span>
   </div>
@@ -182,7 +187,7 @@
       ["Need your data now?", "Can’t wait for <span style='color:#ffa657;'>eons</span>?", "Smile, you did the Skything"]
     ];
 
-    const wingdings = ['🌈', '🪁', '🕊️', '🌙', '🪐', '🚀', '🛸', '✈️', '🛩️', '🪽'];
+    const wingdings = ['☁️', '🌞', '🌙', '🪐', '🚀', '🛸', '🕊️', '✈️', '🛩️', '🌈', '🪽', '🪁'];
     const leftIcon = document.getElementById('leftIcon');
     const rightIcon = document.getElementById('rightIcon');
     const line1 = document.getElementById('line1');
