@@ -15,15 +15,13 @@
       color: #ffffff;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: center;
-      min-height: 100vh;
       text-align: center;
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
     .top-padding {
-      height: 8rem;
+      height: 6rem;
     }
 
     h1 {
@@ -41,63 +39,48 @@
     }
 
     .sparkle-wrapper {
+      margin-top: 1rem;
       position: relative;
-      width: 6rem;
-      height: 6rem;
-      margin-top: 1.5rem;
-      margin-bottom: -5rem;
+      width: 120px;
+      height: 120px;
     }
 
     .sparkle {
       position: absolute;
-      font-size: 1.4rem;
+      font-size: 2.4rem;
       color: white;
-      opacity: 0.7;
-      animation: fade 5s ease-in-out infinite, orbit 10s linear infinite;
-      background: linear-gradient(90deg, cyan, #a1c4fd, #c2e9fb, cyan);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      animation: orbit 6s linear infinite;
+      opacity: 0.8;
     }
 
     .sparkle:nth-child(1) {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      animation-delay: 0s, 0s;
+      animation-delay: 0s;
     }
 
     .sparkle:nth-child(2) {
       top: 50%;
       left: 0;
       transform: translateY(-50%);
-      animation-delay: 0.5s, 2s;
+      animation-delay: 1s;
     }
 
     .sparkle:nth-child(3) {
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      animation-delay: 1s, 4s;
-    }
-
-    @keyframes fade {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 2s;
     }
 
     @keyframes orbit {
-      0% { transform: rotate(0deg) translateX(2rem) rotate(0deg); }
-      100% { transform: rotate(360deg) translateX(2rem) rotate(-360deg); }
-    }
-
-    .spacer {
-      height: 3rem;
+      0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
     }
 
     .taglines {
-      margin-top: 6rem;
-      margin-bottom: 1.5rem;
+      margin: 7rem 0 2rem 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -124,7 +107,7 @@
     }
 
     .strobe-container {
-      margin-top: 2rem;
+      margin-top: 3rem;
       font-size: 1.3rem;
       font-weight: 300;
       display: flex;
@@ -154,7 +137,6 @@
   </style>
 </head>
 <body>
-
   <div class="top-padding"></div>
 
   <h1>Skything</h1>
@@ -162,8 +144,8 @@
 
   <div class="sparkle-wrapper">
     <div class="sparkle">✦</div>
-    <div class="sparkle">✧</div>
-    <div class="sparkle">❉</div>
+    <div class="sparkle">✦</div>
+    <div class="sparkle">✦</div>
   </div>
 
   <div class="taglines">
@@ -173,9 +155,9 @@
   </div>
 
   <div class="strobe-container">
-    <span id="leftIcon" class="strobe-icon">☁️</span>
+    <span id="leftIcon" class="strobe-icon">🛩️</span>
     <a class="strobe-link" id="strobeLink" href="page2.html">Do the Skything</a>
-    <span id="rightIcon" class="strobe-icon">🛸</span>
+    <span id="rightIcon" class="strobe-icon">🚀</span>
   </div>
 
   <script>
@@ -236,6 +218,5 @@
     setInterval(changeIcons, 1000);
     showLines();
   </script>
-
 </body>
 </html>
