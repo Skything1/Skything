@@ -26,7 +26,7 @@
     h1 {
       font-size: 4rem;
       font-weight: 600;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       cursor: pointer;
       transition: opacity 0.3s ease;
     }
@@ -97,70 +97,74 @@
       transform: scale(1.08);
     }
 
-    /* Footer styling */
-    .footer-link-wrapper {
+    footer {
       position: fixed;
       bottom: 2.5rem;
-      left: 0;
-      right: 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       text-align: center;
-      z-index: 10;
+      gap: 0.5rem;
     }
 
-    .footer-link {
-      font-size: 1.1rem;
-      font-weight: 600;
-      background: linear-gradient(90deg, cyan, #a1c4fd, #c2e9fb, cyan);
-      background-size: 200%;
-      background-position: 0% 0;
+    .footer-text a {
+      background: linear-gradient(to right, #00ffff, #61dafb);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: strobe 4s linear infinite;
       text-decoration: none;
+      font-weight: 600;
     }
 
-    @keyframes strobe {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+    .footer-wingdings span {
+      display: inline-block;
+      animation: blink 2s infinite alternate;
+    }
+
+    .footer-wingdings.right span {
+      animation-delay: 1s;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top-left symbol linking to Page 1 -->
   <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
-
-  <!-- Page Title -->
   <h1 onclick="location.href='index.html'">Skything</h1>
 
-  <!-- Navigation Menu -->
   <div class="nav-links">
     <a href="#">Products</a>
     <a href="#">SkyOps & CloudOps</a>
     <a href="#">Skything your AI</a>
-    <a href="#">SkyOS</a>    
+    <a href="#">SkyOS</a>
     <a href="#">Blog</a>
     <a href="#">SkyThingies</a>
   </div>
 
-  <!-- Starry Background -->
   <div class="stars" id="stars"></div>
 
-  <!-- Footer -->
-  <div class="footer-link-wrapper">
-    <a href="page9.html" class="footer-link">
-      ❤️ 💃 🕺 🙌 🕊️ 🌸 🧘 🫶 🌈 🧘‍♂️ ☯️ 🌻 — Doing the Skything — ☯️ 🧘‍♂️ 🌈 🫶 🧘 🌸 🕊️ 🙌 🕺 💃 ❤️
-    </a>
-  </div>
+  <footer>
+    <div class="footer-wingdings left">
+      <span>💙</span><span>💃</span><span>🧘‍♂️</span><span>🌸</span><span>🕊️</span>
+    </div>
+    <div class="footer-text"><a href="page9.html">Doing the Skything</a></div>
+    <div class="footer-wingdings right">
+      <span>🧘‍♀️</span><span>🙏</span><span>☯️</span><span>🌺</span><span>🕺</span>
+    </div>
+  </footer>
 
-  <!-- JavaScript -->
   <script>
-    // Random top-left symbol
     const symbols = ['☁️', '🌞', '🕊️'];
     const symbol = symbols[Math.floor(Math.random() * symbols.length)];
     document.getElementById('symbolLink').textContent = symbol;
 
-    // Star generation
     const starsContainer = document.getElementById('stars');
     const numStars = 100;
     for (let i = 0; i < numStars; i++) {
