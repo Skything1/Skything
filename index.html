@@ -62,7 +62,7 @@
     }
 
     .taglines {
-      margin-bottom: auto;
+      margin: 8rem 0 3rem 0;
     }
 
     .tagline-line {
@@ -81,33 +81,33 @@
       opacity: 1;
     }
 
-    .strobe-link {
-      font-size: 0.95rem;
+    .strobe-container {
+      margin-top: 2rem;
+      font-size: 1.3rem;
       font-weight: 300;
-      text-decoration: none;
-      background: linear-gradient(90deg, white 20%, cyan 50%, white 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .strobe-icon {
+      margin: 0 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    .strobe-link {
+      background: linear-gradient(90deg, cyan, #a1c4fd, #c2e9fb, cyan);
       background-size: 200%;
       background-position: 0% 0;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: strobe-left 4s linear infinite;
-      margin-top: 2rem;
+      animation: strobe 4s linear infinite;
+      text-decoration: none;
     }
 
-    @keyframes strobe-left {
+    @keyframes strobe {
       0% { background-position: 200% 0; }
       100% { background-position: -200% 0; }
-    }
-
-    @keyframes strobe-right {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    @keyframes strobe-center {
-      0%   { background-position: 100% 0; }
-      50%  { background-position: 0% 0; }
-      100% { background-position: 100% 0; }
     }
   </style>
 </head>
@@ -118,12 +118,12 @@
 
   <div class="spacer"></div>
 
-  <!--<div class="subtext">Need to protect all your data on every cloud?</div>
+  <div class="subtext">Need to protect all your data on every cloud?</div>
   <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
   <div class="subtext">Consider it done.</div>
 
   <div class="cta-bold">Skything it.</div>
-  <div class="cta-skinny">Now, not eons</div>-->
+  <div class="cta-skinny">Now, not eons</div>
 
   <div class="spacer"></div>
 
@@ -133,41 +133,27 @@
     <div id="line3" class="tagline-line bold"></div>
   </div>
 
-  <a class="strobe-link" id="strobeLink" href="page2.html">Do the Skything</a>
+  <div class="strobe-container">
+    <span id="leftIcon" class="strobe-icon">☁️</span>
+    <a class="strobe-link" id="strobeLink" href="page2.html">Do the Skything</a>
+    <span id="rightIcon" class="strobe-icon">🌙</span>
+  </div>
 
   <script>
     const taglines = [
-      [
-        "Audit tomorrow, data on three clouds?",
-        '"Fix this!"',
-        "Smile, you did the Skything"
-      ],
-      [
-        "'Show me the data, now!'",
-        "Dead data in backups?",
-        "Smile, you did the Skything"
-      ],
-      [
-        "Two single panes of glass?!",
-        "Backup <b>&</b> DR in <b>one</b> place",
-        "Smile, you did the Skything"
-      ],
-      [
-        "'Wish we knew this two years ago.'",
-        'Tr<span style="color:#3fdad8;font-weight:600;">ai</span>n on backups',
-        "Smile, you did the Skything"
-      ],
-      [
-        "Need your data now?",
-        "Can’t wait for <span style='color:#ffa657;'>eons</span>?",
-        "Smile, you did the Skything"
-      ]
+      ["Audit tomorrow, data on three clouds?", '"Fix this!"', "Smile, you did the Skything"],
+      ["'Show me the data, now!'", "Dead data in backups?", "Smile, you did the Skything"],
+      ["Two single panes of glass?!", "Backup <b>&</b> DR in <b>one</b> place", "Smile, you did the Skything"],
+      ["'Wish we knew this two years ago.'", 'Tr<span style="color:#3fdad8;font-weight:600;">ai</span>n on backups', "Smile, you did the Skything"],
+      ["Need your data now?", "Can’t wait for <span style='color:#ffa657;'>eons</span>?", "Smile, you did the Skything"]
     ];
 
+    const wingdings = ['☁️', '🌞', '🌙', '🪐', '🚀', '🛸', '🕊️', '✈️', '🛩️', '🌈', '🪽', '🕊️', '🪁'];
+    const leftIcon = document.getElementById('leftIcon');
+    const rightIcon = document.getElementById('rightIcon');
     const line1 = document.getElementById('line1');
     const line2 = document.getElementById('line2');
     const line3 = document.getElementById('line3');
-    const strobe = document.getElementById('strobeLink');
 
     let currentIndex = 0;
 
@@ -201,13 +187,14 @@
       }, 600);
     }
 
-    function randomStrobeDirection() {
-      const directions = ['strobe-left', 'strobe-right', 'strobe-center'];
-      const pick = directions[Math.floor(Math.random() * directions.length)];
-      strobe.style.animationName = pick;
+    function changeIcons() {
+      leftIcon.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+      setTimeout(() => {
+        rightIcon.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+      }, 500);
     }
 
-    setInterval(randomStrobeDirection, 6000);
+    setInterval(changeIcons, 1000);
     showLines();
   </script>
 
