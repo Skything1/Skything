@@ -39,39 +39,72 @@
       letter-spacing: 0.5px;
     }
 
-    .spacer {
-      height: 3rem;
-    }
-
-    .subtext {
-      font-size: 1rem;
-      font-weight: 300;
-      opacity: 0.85;
-      margin: 0.3rem 0;
-    }
-
-    .cta-bold {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-top: 2.5rem;
-      letter-spacing: 0.5px;
-    }
-
-    .cta-skinny {
-      font-size: 1rem;
-      font-weight: 300;
-      opacity: 0.8;
-      margin-top: 0.4rem;
-      margin-bottom: 3rem;
-    }
-
-    .taglines {
-      margin: 8rem 0 1rem 0;
+    .sparkles {
+      position: relative;
+      height: 4rem;
+      margin: 2rem 0 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 6rem; /* Enough to hold 3 lines */
+    }
+
+    .sparkle {
+      border: 2px solid white;
+      border-radius: 50%;
+      position: absolute;
+      animation: spin 8s linear infinite, glow 5s ease-in-out infinite alternate;
+      opacity: 0.8;
+    }
+
+    .sparkle.big {
+      width: 3.5rem;
+      height: 3.5rem;
+      animation-delay: 0s;
+    }
+
+    .sparkle.small {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    .sparkle.one {
+      top: -2.8rem;
+      left: -1.6rem;
+      animation-delay: 1.5s;
+    }
+
+    .sparkle.two {
+      top: 2.4rem;
+      left: -1.6rem;
+      animation-delay: 3s;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    @keyframes glow {
+      0% { border-color: #ffffff; }
+      25% { border-color: #a1c4fd; }
+      50% { border-color: #c2e9fb; }
+      75% { border-color: #3fdad8; }
+      100% { border-color: #ffffff; }
+    }
+
+    .spacer {
+      height: 3rem;
+    }
+
+    .taglines {
+      margin: 3rem 0 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 6rem;
     }
 
     .tagline-line {
@@ -79,7 +112,7 @@
       transition: opacity 0.6s ease-in-out;
       font-size: 1rem;
       margin: 0.3rem 0;
-      min-height: 1.4rem; /* Reserve height */
+      min-height: 1.4rem;
       line-height: 1.4rem;
     }
 
@@ -129,8 +162,11 @@
   <h1>Skything</h1>
   <h2>Sky wide data protection</h2>
 
-  <div class="spacer"></div>
-  <div class="spacer"></div>
+  <div class="sparkles">
+    <div class="sparkle big"></div>
+    <div class="sparkle small one"></div>
+    <div class="sparkle small two"></div>
+  </div>
 
   <div class="taglines">
     <div id="line1" class="tagline-line"></div>
