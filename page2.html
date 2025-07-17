@@ -19,14 +19,14 @@
       color: #ffffff;
       text-align: center;
       height: 100%;
+      overflow-x: hidden;
     }
 
     body {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       min-height: 100vh;
-      position: relative;
     }
 
     .main {
@@ -35,6 +35,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding-bottom: 4rem; /* Reserve space for fixed footer */
     }
 
     h1 {
@@ -108,6 +109,11 @@
     }
 
     .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -116,6 +122,7 @@
       font-weight: 600;
       padding: 1.2rem;
       color: #00e0ff;
+      z-index: 10;
     }
 
     .footer a {
@@ -148,7 +155,7 @@
 
   <!-- Footer -->
   <div class="footer">
-    <span id="leftWingding">💙</span>
+    <span id="leftWingding">❤️</span>
     <a href="#">Doing the Skything</a>
     <span id="rightWingding">🧘‍♂️</span>
   </div>
@@ -172,7 +179,9 @@
     }
 
     // Wingding alternator
-    const wingdings = ['💙','🧘‍♀️','💃','🙏','☯️','🌸','🧘‍♂️','🕊️','🪷','🪬','🌼','🕉️'];
+    const wingdings = [
+      '❤️', '🙌', '💃', '🤸‍♂️', '🧘‍♀️', '🧘‍♂️', '🕊️', '🌸', '🪷', '🪬', '🌼', '🕉️'
+    ];
     const left = document.getElementById('leftWingding');
     const right = document.getElementById('rightWingding');
 
@@ -184,7 +193,6 @@
       right.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
     }
 
-    // Start animation
     updateLeft();
     updateRight();
     setInterval(() => {
