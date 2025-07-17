@@ -15,14 +15,16 @@
       color: #ffffff;
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      text-align: center;
       min-height: 100vh;
-      overflow-x: hidden;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
     }
 
     .top-padding {
-      height: 6rem;
+      height: 8rem;
     }
 
     h1 {
@@ -39,55 +41,12 @@
       letter-spacing: 0.5px;
     }
 
-    .orbit-wrapper {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin-top: 1rem;
-    }
-
-    .sparkle {
-      position: absolute;
-      font-size: 2.4rem;
-      color: white;
-      opacity: 0.8;
-      animation: orbit 6s linear infinite;
-    }
-
-    .sparkle:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation-delay: 0s; }
-    .sparkle:nth-child(2) { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 1s; }
-    .sparkle:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 2s; }
-
-    @keyframes orbit {
-      0% { transform: rotate(0deg) translateX(60px) rotate(0deg); }
-      100% { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
-    }
-
-.starscape {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-    .star {
-      position: absolute;
-      font-size: 0.5rem;
-      color: white;
-      opacity: 0;
-      animation: twinkle 6s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      40% { opacity: 0.4; }
-      50% { opacity: 0.8; }
-      60% { opacity: 0.4; }
+    .spacer {
+      height: 2rem;
     }
 
     .taglines {
-      margin: 7rem 0 2rem 0;
+      margin: 5rem 0 2rem 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -141,20 +100,79 @@
       0% { background-position: 200% 0; }
       100% { background-position: -200% 0; }
     }
+
+    .orbit-container {
+      position: relative;
+      height: 4rem;
+      margin-top: 1.5rem;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 5rem;
+      height: 5rem;
+      top: 0;
+      left: 50%;
+      transform-origin: center;
+      animation: orbit 10s linear infinite;
+    }
+
+    .orbit .sparkle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.4rem;
+      animation: sparkleFade 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes sparkleFade {
+      0% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .background-stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 5s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
-  <div class="starscape" id="starscape"></div>
+  <div class="background-stars" id="stars"></div>
 
   <div class="top-padding"></div>
-
   <h1>Skything</h1>
   <h2>Sky wide data protection</h2>
 
-  <div class="orbit-wrapper">
-    <div class="sparkle">✦</div>
-    <div class="sparkle">✦</div>
-    <div class="sparkle">✦</div>
+  <div class="orbit-container">
+    <div class="orbit" style="animation-delay: 0s;"><div class="sparkle">✨</div></div>
+    <div class="orbit" style="animation-delay: 3.3s;"><div class="sparkle">✨</div></div>
+    <div class="orbit" style="animation-delay: 6.6s;"><div class="sparkle">✨</div></div>
   </div>
 
   <div class="taglines">
@@ -178,9 +196,6 @@
       ["Need your data now?", "Can’t wait for <span style='color:#ffa657;'>eons</span>?", "Smile, you did the Skything"]
     ];
 
-    const wingdings = ['☁️', '🌞', '🌙', '🪐', '🚀', '🛸', '🕊️', '✈️', '🛩️', '🌈', '🪽', '🪁'];
-    const leftIcon = document.getElementById('leftIcon');
-    const rightIcon = document.getElementById('rightIcon');
     const line1 = document.getElementById('line1');
     const line2 = document.getElementById('line2');
     const line3 = document.getElementById('line3');
@@ -218,29 +233,28 @@
     }
 
     function changeIcons() {
-      leftIcon.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+      const wingdings = ['☁️', '🌞', '🌙', '🪐', '🚀', '🛸', '🕊️', '✈️', '🛩️', '🌈', '🪽', '🕊️', '🪁'];
+      document.getElementById('leftIcon').textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
       setTimeout(() => {
-        rightIcon.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+        document.getElementById('rightIcon').textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
       }, 500);
     }
 
-    function addStars() {
-      const starCount = 40;
-      const container = document.getElementById('starscape');
-      for (let i = 0; i < starCount; i++) {
+    function generateStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 80; i++) {
         const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = `${Math.random() * 100}%`;
+        star.classList.add('star');
         star.style.top = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 6}s`;
-        star.innerHTML = '✦';
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
         container.appendChild(star);
       }
     }
 
+    generateStars();
     setInterval(changeIcons, 1000);
     showLines();
-    addStars();
   </script>
 </body>
 </html>
