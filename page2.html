@@ -2,122 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skything - Page 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skything – Page 2</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
+
     body {
       margin: 0;
       padding: 0;
-      background: #0a0b10;
-      color: #fff;
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-    }
-
-    .stars {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
+      background-color: #0d1117;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
       text-align: center;
-      padding-top: 80px; /* Reduced from ~120px to ~80px */
+    }
+
+    .top-spacing {
+      height: 5rem; /* Reduced from previous ~7rem */
     }
 
     h1 {
-      font-size: 3.8rem; /* Slight increase */
-      margin-bottom: 0.5rem;
+      font-size: 4.5rem; /* Slightly increased */
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
     }
 
-    p {
-      margin: 0.4rem 0;
-      font-size: 1.2rem;
+    h1:hover {
+      opacity: 0.85;
     }
 
-    /* Footer */
-    .footer {
-      position: fixed;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
+    .nav-links {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 6s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.8; }
+    }
+
+    .symbol-link {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 0.6rem 0.9rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .symbol-link:hover {
+      transform: scale(1.08);
+    }
+
+    /* Footer styling to match page 1 */
+    .footer-container {
+      position: fixed;
+      bottom: 2.2rem;
+      left: 0;
+      right: 0;
+      display: flex;
       justify-content: center;
+      align-items: center;
       font-family: 'Inter', sans-serif;
       font-weight: 300;
       font-size: 1rem;
-      color: #ffffff;
-      white-space: nowrap;
+      color: white;
+      z-index: 10;
+      pointer-events: auto;
     }
 
-    .footer .emoji {
-      margin: 0 0.3rem;
-      animation: strobe 2s infinite alternate;
+    .footer-icon {
+      margin: 0 0.5rem;
+      font-size: 1.4rem;
     }
 
-    .footer .text {
-      margin: 0 0.3rem;
-      background: linear-gradient(to right, #72ffff, #c2cbff);
+    .footer-link {
+      background: linear-gradient(90deg, #57c1eb, #a1c4fd, #57c1eb);
+      background-size: 200%;
+      background-position: 0% 0;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 400;
-      animation: strobe 2s infinite alternate;
+      animation: strobe-footer 3s ease-in-out infinite alternate;
+      text-decoration: none;
     }
 
-    @keyframes strobe {
-      0% { opacity: 1; }
-      50% { opacity: 0.6; }
-      100% { opacity: 1; }
+    @keyframes strobe-footer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
 
-  <div class="container">
-    <h1>Skything</h1>
-    <div class="nav-links">
-      <p>Products</p>
-      <p>SkyOps &amp; CloudOps</p>
-      <p>Skything your AI</p>
-      <p>SkyOS</p>
-      <p>Blog</p>
-      <p>SkyThingies</p>
-    </div>
+  <!-- Symbol top left -->
+  <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
+
+  <div class="top-spacing"></div>
+
+  <!-- Header title -->
+  <h1 onclick="location.href='index.html'">Skything</h1>
+
+  <div class="nav-links">
+    <a href="#">Products</a>
+    <a href="#">Skything your craft</a>
+    <a href="#">Skything insurance</a>
+    <a href="#">Our Blog</a>
   </div>
 
-  <div class="footer">
-    <span class="emoji" id="left-emoji">❤️</span>
-    <span class="text">Do the Skything</span>
-    <span class="emoji" id="right-emoji">🤸</span>
+  <!-- Stars in background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Footer identical to Page 1 -->
+  <div class="footer-container">
+    <span id="leftFooterIcon" class="footer-icon">❤️</span>
+    <a href="page9.html" class="footer-link">Doing the Skything</a>
+    <span id="rightFooterIcon" class="footer-icon">🧘‍♂️</span>
   </div>
 
   <script>
-    const emojis = ['❤️', '🤸', '💃', '🧘‍♂️', '🌸', '🌼', '🕺', '🙏', '🙌', '🧘'];
-    const left = document.getElementById("left-emoji");
-    const right = document.getElementById("right-emoji");
+    // Random emoji symbol for top left
+    const symbols = ['☁️', '🌞', '🕊️'];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    document.getElementById('symbolLink').textContent = symbol;
 
-    let indexL = 0;
-    let indexR = 5;
-
-    function updateLeft() {
-      indexL = (indexL + 1) % emojis.length;
-      left.textContent = emojis[indexL];
-      setTimeout(updateRight, 500);
+    // Star generator
+    const starsContainer = document.getElementById('stars');
+    const numStars = 100;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(star);
     }
 
-    function updateRight() {
-      indexR = (indexR + 1) % emojis.length;
-      right.textContent = emojis[indexR];
-      setTimeout(updateLeft, 500);
-    }
+    // Alternating Wingdings in footer
+    const footerIcons = ['❤️', '🕺', '🧘‍♂️', '💐', '🙌', '🤸'];
+    const left = document.getElementById('leftFooterIcon');
+    const right = document.getElementById('rightFooterIcon');
+    let i = 0;
 
-    setTimeout(updateLeft, 500);
+    setInterval(() => {
+      left.textContent = footerIcons[Math.floor(Math.random() * footerIcons.length)];
+    }, 1000);
+
+    setTimeout(() => {
+      setInterval(() => {
+        right.textContent = footerIcons[Math.floor(Math.random() * footerIcons.length)];
+      }, 1000);
+    }, 500);
   </script>
+
 </body>
 </html>
