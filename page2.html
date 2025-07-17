@@ -1,183 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Skything – Page 2</title>
+  <title>Skything</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #0d1117;
-      color: white;
-      text-align: center;
-      height: 100%;
+      background-color: #0a0d12;
+      color: #fff;
       overflow-x: hidden;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-bottom: 4rem; /* footer space */
-    }
-
-    h1 {
-      font-size: 4rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      cursor: pointer;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      font-size: 1.3rem;
-      font-weight: 300;
-      opacity: 0.9;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      opacity: 1;
-    }
-
-    .symbol-link {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(5px);
-      border-radius: 2rem;
-      padding: 0.6rem 0.9rem;
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s ease;
-    }
-
-    .symbol-link:hover {
-      transform: scale(1.08);
     }
 
     .stars {
       position: fixed;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
-      z-index: -1;
+      background: url('https://raw.githubusercontent.com/barakshein/skything/main/stars.png') repeat;
+      z-index: 0;
+      animation: moveStars 240s linear infinite;
     }
 
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0;
-      animation: twinkle 6s infinite ease-in-out;
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 0.8; }
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0.2em 0;
+    }
+
+    .nav-links p {
+      font-size: 1.3em;
+      margin: 0.3em;
+      color: #ccc;
     }
 
     .footer {
       position: fixed;
-      bottom: 0;
+      bottom: 10px;
       left: 0;
       width: 100%;
       text-align: center;
-      padding: 1.2rem 0.5rem;
-      font-size: 1.1rem;
-      font-weight: 500;
       font-family: 'Inter', sans-serif;
-      color: #00e0ff;
+      font-size: 1.1em;
+      font-weight: 500;
       z-index: 10;
+      pointer-events: none;
     }
 
     .footer span {
-      animation: strobe 1.5s infinite;
-      font-weight: 500;
-      font-size: 1.1rem;
+      animation: strobe 1.5s infinite alternate;
+    }
+
+    .wingding {
       display: inline-block;
+      padding: 0 0.4em;
     }
 
     @keyframes strobe {
-      0% { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
-      50% { opacity: 0.6; text-shadow: 0 0 8px #00e0ff; }
-      100% { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
+      from {
+        text-shadow: 0 0 2px #0ff, 0 0 4px #0ff;
+      }
+      to {
+        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+      }
+    }
+
+    .back-icon {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.05);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      font-size: 1.5em;
+      transition: transform 0.2s ease;
+    }
+
+    .back-icon:hover {
+      transform: scale(1.2);
     }
   </style>
 </head>
 <body>
+  <div class="stars"></div>
 
-  <!-- Top-left nav symbol -->
-  <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
+  <div class="back-icon" onclick="window.location.href='index.html';" id="backIcon">☁️</div>
 
-  <!-- Stars -->
-  <div class="stars" id="stars"></div>
-
-  <!-- Main Content -->
-  <div class="main">
-    <h1 onclick="location.href='index.html'">Skything</h1>
+  <div class="container">
+    <h1>Skything</h1>
     <div class="nav-links">
-      <a href="#">Products</a>
-      <a href="#">SkyOps & CloudOps</a>
-      <a href="#">Skything your AI</a>
-      <a href="#">SkyOS</a>
-      <a href="#">Blog</a>
-      <a href="#">SkyThingies</a>
+      <p>Products</p>
+      <p>SkyOps &amp; CloudOps</p>
+      <p>Skything your AI</p>
+      <p>SkyOS</p>
+      <p>Blog</p>
+      <p>SkyThingies</p>
     </div>
   </div>
 
-  <!-- Footer -->
   <div class="footer">
-    <span id="footerLine">❤️💃🌸🕊️ <strong>Do the Skything</strong> 🧘‍♂️🙌🤸‍♂️🌼</span>
+    <span class="wingding" id="leftWingding">❤️</span>
+    <span>Do the Skything</span>
+    <span class="wingding" id="rightWingding">🕺</span>
   </div>
 
   <script>
-    // Random icon top-left
-    const symbols = ['☁️', '🌞', '🕊️'];
-    document.getElementById('symbolLink').textContent =
-      symbols[Math.floor(Math.random() * symbols.length)];
+    const emojis = ['❤️', '💃', '🌸', '🕊️', '🧘', '🤸', '🌼', '🙌', '🕺', '🙏'];
+    const left = document.getElementById('leftWingding');
+    const right = document.getElementById('rightWingding');
 
-    // Generate stars
-    const starsContainer = document.getElementById('stars');
-    for (let i = 0; i < 100; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.style.top = `${Math.random() * 100}%`;
-      s.style.left = `${Math.random() * 100}%`;
-      s.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(s);
+    function getRandomEmoji(current) {
+      let next;
+      do {
+        next = emojis[Math.floor(Math.random() * emojis.length)];
+      } while (next === current);
+      return next;
     }
-  </script>
 
+    let leftEmoji = left.textContent;
+    let rightEmoji = right.textContent;
+
+    setInterval(() => {
+      leftEmoji = getRandomEmoji(leftEmoji);
+      left.textContent = leftEmoji;
+    }, 1000);
+
+    setTimeout(() => {
+      setInterval(() => {
+        rightEmoji = getRandomEmoji(rightEmoji);
+        right.textContent = rightEmoji;
+      }, 1000);
+    }, 500);
+
+    // Pick random back icon
+    const icons = ['☀️','☁️','🕊️'];
+    document.getElementById('backIcon').textContent = icons[Math.floor(Math.random() * icons.length)];
+  </script>
 </body>
 </html>
