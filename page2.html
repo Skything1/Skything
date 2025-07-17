@@ -7,45 +7,47 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
 
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
       background-color: #0d1117;
       color: #ffffff;
+      text-align: center;
+      height: 100%;
+    }
+
+    body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
       min-height: 100vh;
-      text-align: center;
       position: relative;
     }
 
-    .main-content {
+    .main {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      flex-grow: 1;
+      align-items: center;
     }
 
     h1 {
       font-size: 4rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       cursor: pointer;
-      transition: opacity 0.3s ease;
-    }
-
-    h1:hover {
-      opacity: 0.85;
     }
 
     .nav-links {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
       font-size: 1.3rem;
       font-weight: 300;
       opacity: 0.9;
@@ -61,12 +63,32 @@
       opacity: 1;
     }
 
-    .stars {
+    .symbol-link {
       position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(5px);
+      border-radius: 2rem;
+      padding: 0.6rem 0.9rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .symbol-link:hover {
+      transform: scale(1.08);
+    }
+
+    .stars {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      pointer-events: none;
       z-index: -1;
     }
 
@@ -85,33 +107,15 @@
       50% { opacity: 0.8; }
     }
 
-    .symbol-link {
-      position: absolute;
-      top: 1.2rem;
-      left: 1.2rem;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(4px);
-      border-radius: 2rem;
-      padding: 0.6rem 0.9rem;
-      font-size: 1.5rem;
-      line-height: 1;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s ease;
-    }
-
-    .symbol-link:hover {
-      transform: scale(1.08);
-    }
-
     .footer {
-      font-size: 1.2rem;
-      color: #00e0ff;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin: 1rem 0;
+      padding: 1.2rem;
+      color: #00e0ff;
     }
 
     .footer a {
@@ -122,40 +126,40 @@
 </head>
 <body>
 
-  <!-- Random top-left symbol -->
+  <!-- Symbol link top left -->
   <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
 
-  <div class="main-content">
-    <!-- Header title, also links to page 1 -->
+  <!-- Starry background -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Main content -->
+  <div class="main">
     <h1 onclick="location.href='index.html'">Skything</h1>
 
     <div class="nav-links">
       <a href="#">Products</a>
       <a href="#">SkyOps & CloudOps</a>
       <a href="#">Skything your AI</a>
-      <a href="#">SkyOS</a>    
+      <a href="#">SkyOS</a>
       <a href="#">Blog</a>
       <a href="#">SkyThingies</a>
     </div>
   </div>
 
-  <!-- Starry background -->
-  <div class="stars" id="stars"></div>
-
   <!-- Footer -->
   <div class="footer">
     <span id="leftWingding">💙</span>
-    <a href="page9.html">Doing the Skything</a>
+    <a href="#">Doing the Skything</a>
     <span id="rightWingding">🧘‍♂️</span>
   </div>
 
   <script>
-    // Symbol top-left
+    // Top-left symbol randomizer
     const symbols = ['☁️', '🌞', '🕊️'];
     document.getElementById('symbolLink').textContent =
       symbols[Math.floor(Math.random() * symbols.length)];
 
-    // Star field
+    // Stars
     const starsContainer = document.getElementById('stars');
     const numStars = 100;
     for (let i = 0; i < numStars; i++) {
@@ -167,20 +171,26 @@
       starsContainer.appendChild(star);
     }
 
-    // Wingding animation alternating
+    // Wingding alternator
     const wingdings = ['💙','🧘‍♀️','💃','🙏','☯️','🌸','🧘‍♂️','🕊️','🪷','🪬','🌼','🕉️'];
     const left = document.getElementById('leftWingding');
     const right = document.getElementById('rightWingding');
 
-    function cycleWingdings() {
+    function updateLeft() {
       left.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
-      setTimeout(() => {
-        right.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
-      }, 500);
     }
 
-    cycleWingdings();
-    setInterval(cycleWingdings, 1000);
+    function updateRight() {
+      right.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
+    }
+
+    // Start animation
+    updateLeft();
+    updateRight();
+    setInterval(() => {
+      updateLeft();
+      setTimeout(updateRight, 500);
+    }, 1000);
   </script>
 
 </body>
