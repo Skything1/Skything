@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skything – Page 2</title>
   <style>
@@ -16,7 +16,7 @@
       padding: 0;
       font-family: 'Inter', sans-serif;
       background-color: #0d1117;
-      color: #ffffff;
+      color: white;
       text-align: center;
       height: 100%;
       overflow-x: hidden;
@@ -35,7 +35,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-bottom: 4rem; /* reserve space for fixed footer */
+      padding-bottom: 4rem; /* footer space */
     }
 
     h1 {
@@ -73,7 +73,6 @@
       border-radius: 2rem;
       padding: 0.6rem 0.9rem;
       font-size: 1.5rem;
-      line-height: 1;
       text-decoration: none;
       color: white;
       transition: transform 0.3s ease;
@@ -113,45 +112,40 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
+      text-align: center;
+      padding: 1.2rem 0.5rem;
       font-size: 1.1rem;
       font-weight: 500;
-      padding: 1.2rem 0.8rem;
+      font-family: 'Inter', sans-serif;
       color: #00e0ff;
       z-index: 10;
     }
 
-    .footer a {
-      color: #00e0ff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
+    .footer span {
       animation: strobe 1.5s infinite;
+      font-weight: 500;
+      font-size: 1.1rem;
+      display: inline-block;
     }
 
     @keyframes strobe {
-      0%   { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
-      50%  { opacity: 0.7; text-shadow: 0 0 8px #00e0ff; }
+      0% { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
+      50% { opacity: 0.6; text-shadow: 0 0 8px #00e0ff; }
       100% { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Symbol link top left -->
+  <!-- Top-left nav symbol -->
   <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
 
-  <!-- Starry background -->
+  <!-- Stars -->
   <div class="stars" id="stars"></div>
 
-  <!-- Main content -->
+  <!-- Main Content -->
   <div class="main">
     <h1 onclick="location.href='index.html'">Skything</h1>
-
     <div class="nav-links">
       <a href="#">Products</a>
       <a href="#">SkyOps & CloudOps</a>
@@ -164,50 +158,25 @@
 
   <!-- Footer -->
   <div class="footer">
-    <span id="leftWingding">❤️</span>
-    <a href="#">Doing the Skything</a>
-    <span id="rightWingding">🧘‍♂️</span>
+    <span id="footerLine">❤️💃🌸🕊️ <strong>Do the Skything</strong> 🧘‍♂️🙌🤸‍♂️🌼</span>
   </div>
 
   <script>
-    // Top-left symbol randomizer
+    // Random icon top-left
     const symbols = ['☁️', '🌞', '🕊️'];
     document.getElementById('symbolLink').textContent =
       symbols[Math.floor(Math.random() * symbols.length)];
 
-    // Stars
+    // Generate stars
     const starsContainer = document.getElementById('stars');
-    const numStars = 100;
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(star);
+    for (let i = 0; i < 100; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.top = `${Math.random() * 100}%`;
+      s.style.left = `${Math.random() * 100}%`;
+      s.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(s);
     }
-
-    // Wingdings animation
-    const wingdings = [
-      '❤️', '🙌', '💃', '🤸‍♂️', '🧘‍♀️', '🧘‍♂️', '🕊️', '🌸', '🪷', '🪬', '🌼', '🕉️'
-    ];
-    const left = document.getElementById('leftWingding');
-    const right = document.getElementById('rightWingding');
-
-    function updateLeft() {
-      left.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
-    }
-
-    function updateRight() {
-      right.textContent = wingdings[Math.floor(Math.random() * wingdings.length)];
-    }
-
-    updateLeft();
-    updateRight();
-    setInterval(() => {
-      updateLeft();
-      setTimeout(updateRight, 500);
-    }, 1000);
   </script>
 
 </body>
