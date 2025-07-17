@@ -39,44 +39,44 @@
       letter-spacing: 0.5px;
     }
 
-    .spacer {
-      height: 2.5rem;
-    }
-
     .sparkle-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 3rem;
-      gap: 0.8rem;
-      animation: sparklePulse 6s ease-in-out infinite;
+      margin: 3rem 0;
+      height: 4rem;
     }
 
-    .sparkle {
-      stroke: #ffffffaa;
+    .sparkle-svg {
+      width: 3.5rem;
+      height: 3.5rem;
+      stroke: #3fdad8;
       fill: none;
-      stroke-width: 1.2;
-      animation: draw 4s ease-in-out infinite alternate;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: sparkle-fade 6s ease-in-out infinite alternate;
     }
 
-    .sparkle.big {
-      width: 3rem;
-      height: 3rem;
+    .sparkle-small {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: 0.5rem;
+      animation-delay: 1s;
     }
 
-    .sparkle.small {
-      width: 1.5rem;
-      height: 1.5rem;
+    .sparkle-smaller {
+      width: 0.8rem;
+      height: 0.8rem;
+      margin-right: 1.5rem;
+      animation-delay: 2s;
     }
 
-    @keyframes sparklePulse {
-      0%, 100% { opacity: 0.7; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.04); }
+    @keyframes sparkle-fade {
+      0% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+      50% { opacity: 0.7; transform: scale(1.1) rotate(10deg); }
+      100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
     }
 
-    @keyframes draw {
-      0% { stroke-dasharray: 10, 50; stroke-dashoffset: 0; }
-      100% { stroke-dasharray: 30, 30; stroke-dashoffset: 5; }
+    .spacer {
+      height: 2rem;
     }
 
     .taglines {
@@ -144,15 +144,19 @@
   <h2>Sky wide data protection</h2>
 
   <div class="sparkle-container">
-    <svg class="sparkle small" viewBox="0 0 24 24">
-      <path d="M12 2 L13 11 L12 22 L11 11 Z M2 12 L11 13 L22 12 L11 11 Z" />
-    </svg>
-    <svg class="sparkle small" viewBox="0 0 24 24">
-      <path d="M12 2 L13 11 L12 22 L11 11 Z M2 12 L11 13 L22 12 L11 11 Z" />
-    </svg>
-    <svg class="sparkle big" viewBox="0 0 24 24">
-      <path d="M12 2 L14 12 L12 22 L10 12 Z M2 12 L12 14 L22 12 L12 10 Z" />
-    </svg>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <!-- Smaller sparkles -->
+      <svg class="sparkle-svg sparkle-smaller" viewBox="0 0 24 24">
+        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
+      </svg>
+      <svg class="sparkle-svg sparkle-small" viewBox="0 0 24 24">
+        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
+      </svg>
+      <!-- Main sparkle -->
+      <svg class="sparkle-svg" viewBox="0 0 24 24">
+        <path d="M12 2 L13 11 L22 12 L13 13 L12 22 L11 13 L2 12 L11 11 Z" />
+      </svg>
+    </div>
   </div>
 
   <div class="taglines">
