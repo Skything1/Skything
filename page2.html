@@ -27,6 +27,12 @@
       font-size: 4rem;
       font-weight: 600;
       margin-bottom: 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+
+    h1:hover {
+      opacity: 0.85;
     }
 
     .nav-links {
@@ -71,13 +77,35 @@
       0%, 100% { opacity: 0; }
       50% { opacity: 0.8; }
     }
+
+    .symbol-link {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 0.6rem 0.9rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .symbol-link:hover {
+      transform: scale(1.08);
+    }
   </style>
 </head>
 <body>
 
-  <div class="stars" id="stars"></div>
+  <!-- Random top-left symbol that links back to page1 -->
+  <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
 
-  <h1>Skything</h1>
+  <!-- Header title, also links to page 1 -->
+  <h1 onclick="location.href='index.html'">Skything</h1>
+
   <div class="nav-links">
     <a href="#">Products</a>
     <a href="#">Skything your craft</a>
@@ -85,8 +113,16 @@
     <a href="#">Our Blog</a>
   </div>
 
+  <!-- Starry background -->
+  <div class="stars" id="stars"></div>
+
   <script>
-    // Add randomized stars to background
+    // Random emoji symbol selection
+    const symbols = ['☁️', '🌞', '🕊️'];
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    document.getElementById('symbolLink').textContent = symbol;
+
+    // Generate star field
     const starsContainer = document.getElementById('stars');
     const numStars = 100;
 
