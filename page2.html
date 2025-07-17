@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Skything</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skything - Page 2</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0a0d12;
+      background: #0a0b10;
       color: #fff;
+      font-family: 'Inter', sans-serif;
       overflow-x: hidden;
     }
 
@@ -19,91 +18,66 @@
       position: fixed;
       width: 100%;
       height: 100%;
-      background: url('https://raw.githubusercontent.com/barakshein/skything/main/stars.png') repeat;
+      background: transparent;
       z-index: 0;
-      animation: moveStars 240s linear infinite;
-    }
-
-    @keyframes moveStars {
-      from { background-position: 0 0; }
-      to { background-position: 10000px 10000px; }
     }
 
     .container {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       text-align: center;
+      padding-top: 80px; /* Reduced from ~120px to ~80px */
     }
 
     h1 {
-      font-size: 3em;
-      margin: 0.2em 0;
+      font-size: 3.8rem; /* Slight increase */
+      margin-bottom: 0.5rem;
     }
 
-    .nav-links p {
-      font-size: 1.3em;
-      margin: 0.3em;
-      color: #ccc;
+    p {
+      margin: 0.4rem 0;
+      font-size: 1.2rem;
     }
 
+    /* Footer */
     .footer {
       position: fixed;
       bottom: 10px;
-      left: 0;
-      width: 100%;
-      text-align: center;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Inter', sans-serif;
-      font-size: 1.1em;
-      font-weight: 500;
-      z-index: 10;
-      pointer-events: none;
+      font-weight: 300;
+      font-size: 1rem;
+      color: #ffffff;
+      white-space: nowrap;
     }
 
-    .footer span {
-      animation: strobe 1.5s infinite alternate;
+    .footer .emoji {
+      margin: 0 0.3rem;
+      animation: strobe 2s infinite alternate;
     }
 
-    .wingding {
-      display: inline-block;
-      padding: 0 0.4em;
+    .footer .text {
+      margin: 0 0.3rem;
+      background: linear-gradient(to right, #72ffff, #c2cbff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 400;
+      animation: strobe 2s infinite alternate;
     }
 
     @keyframes strobe {
-      from {
-        text-shadow: 0 0 2px #0ff, 0 0 4px #0ff;
-      }
-      to {
-        text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-      }
-    }
-
-    .back-icon {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: rgba(255,255,255,0.05);
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 2;
-      font-size: 1.5em;
-      transition: transform 0.2s ease;
-    }
-
-    .back-icon:hover {
-      transform: scale(1.2);
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div class="stars"></div>
-
-  <div class="back-icon" onclick="window.location.href='index.html';" id="backIcon">☁️</div>
 
   <div class="container">
     <h1>Skything</h1>
@@ -118,42 +92,32 @@
   </div>
 
   <div class="footer">
-    <span class="wingding" id="leftWingding">❤️</span>
-    <span>Do the Skything</span>
-    <span class="wingding" id="rightWingding">🕺</span>
+    <span class="emoji" id="left-emoji">❤️</span>
+    <span class="text">Do the Skything</span>
+    <span class="emoji" id="right-emoji">🤸</span>
   </div>
 
   <script>
-    const emojis = ['❤️', '💃', '🌸', '🕊️', '🧘', '🤸', '🌼', '🙌', '🕺', '🙏'];
-    const left = document.getElementById('leftWingding');
-    const right = document.getElementById('rightWingding');
+    const emojis = ['❤️', '🤸', '💃', '🧘‍♂️', '🌸', '🌼', '🕺', '🙏', '🙌', '🧘'];
+    const left = document.getElementById("left-emoji");
+    const right = document.getElementById("right-emoji");
 
-    function getRandomEmoji(current) {
-      let next;
-      do {
-        next = emojis[Math.floor(Math.random() * emojis.length)];
-      } while (next === current);
-      return next;
+    let indexL = 0;
+    let indexR = 5;
+
+    function updateLeft() {
+      indexL = (indexL + 1) % emojis.length;
+      left.textContent = emojis[indexL];
+      setTimeout(updateRight, 500);
     }
 
-    let leftEmoji = left.textContent;
-    let rightEmoji = right.textContent;
+    function updateRight() {
+      indexR = (indexR + 1) % emojis.length;
+      right.textContent = emojis[indexR];
+      setTimeout(updateLeft, 500);
+    }
 
-    setInterval(() => {
-      leftEmoji = getRandomEmoji(leftEmoji);
-      left.textContent = leftEmoji;
-    }, 1000);
-
-    setTimeout(() => {
-      setInterval(() => {
-        rightEmoji = getRandomEmoji(rightEmoji);
-        right.textContent = rightEmoji;
-      }, 1000);
-    }, 500);
-
-    // Pick random back icon
-    const icons = ['☀️','☁️','🕊️'];
-    document.getElementById('backIcon').textContent = icons[Math.floor(Math.random() * icons.length)];
+    setTimeout(updateLeft, 500);
   </script>
 </body>
 </html>
