@@ -3,202 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Skything – Page 2</title>
+  <title>Skything - Page 2</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
-
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #0d1117;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
+      background-color: #0c0c0d;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      padding-top: 8vh; /* reduced top space */
       text-align: center;
     }
 
-    .top-spacing {
-      height: 5rem; /* Reduced from previous ~7rem */
-    }
-
     h1 {
-      font-size: 4.5rem; /* Slightly increased */
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      cursor: pointer;
-      transition: opacity 0.3s ease;
+      font-size: 3rem; /* increased font size */
+      margin-bottom: 1rem;
     }
 
-    h1:hover {
-      opacity: 0.85;
+    p, .nav-item {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 0.5rem 0;
     }
 
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      font-size: 1.3rem;
-      font-weight: 300;
-      opacity: 0.9;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      opacity: 1;
-    }
-
-    .stars {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0;
-      animation: twinkle 6s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 0.8; }
-    }
-
-    .symbol-link {
-      position: absolute;
-      top: 1.2rem;
-      left: 1.2rem;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(4px);
-      border-radius: 2rem;
-      padding: 0.6rem 0.9rem;
-      font-size: 1.5rem;
-      line-height: 1;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s ease;
-    }
-
-    .symbol-link:hover {
-      transform: scale(1.08);
-    }
-
-    /* Footer styling to match page 1 */
-    .footer-container {
+    .footer {
       position: fixed;
-      bottom: 2.2rem;
-      left: 0;
-      right: 0;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      padding: 12px 0 10px;
+      background: transparent;
+      font-family: 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 16px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      font-size: 1rem;
-      color: white;
-      z-index: 10;
-      pointer-events: auto;
+      gap: 8px;
+      z-index: 9999;
     }
 
-    .footer-icon {
-      margin: 0 0.5rem;
-      font-size: 1.4rem;
-    }
-
-    .footer-link {
-      background: linear-gradient(90deg, #57c1eb, #a1c4fd, #57c1eb);
-      background-size: 200%;
-      background-position: 0% 0;
+    .footer span {
+      animation: strobe 3s ease-in-out infinite;
+      background-clip: text;
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: strobe-footer 3s ease-in-out infinite alternate;
-      text-decoration: none;
+      color: transparent;
+      background-image: linear-gradient(90deg, #90cdf4, #63b3ed, #4299e1, #63b3ed, #90cdf4);
+      background-size: 300% 100%;
+      font-weight: 300;
     }
 
-    @keyframes strobe-footer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes strobe {
+      0%   { background-position: 50% 0; }
+      25%  { background-position: 0% 0; }
+      50%  { background-position: 50% 0; }
+      75%  { background-position: 100% 0; }
+      100% { background-position: 50% 0; }
+    }
+
+    .emoji {
+      font-size: 18px;
+      transition: opacity 0.2s ease-in-out;
     }
   </style>
 </head>
 <body>
-
-  <!-- Symbol top left -->
-  <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
-
-  <div class="top-spacing"></div>
-
-  <!-- Header title -->
-  <h1 onclick="location.href='index.html'">Skything</h1>
-
-  <div class="nav-links">
-    <a href="#">Products</a>
-    <a href="#">Skything your craft</a>
-    <a href="#">Skything insurance</a>
-    <a href="#">Our Blog</a>
+  <div class="container">
+    <h1>Skything</h1>
+    <div class="nav-item">Products</div>
+    <div class="nav-item">SkyOps & CloudOps</div>
+    <div class="nav-item">Skything your AI</div>
+    <div class="nav-item">SkyOS</div>
+    <div class="nav-item">Blog</div>
+    <div class="nav-item">SkyThingies</div>
   </div>
 
-  <!-- Stars in background -->
-  <div class="stars" id="stars"></div>
-
-  <!-- Footer identical to Page 1 -->
-  <div class="footer-container">
-    <span id="leftFooterIcon" class="footer-icon">❤️</span>
-    <a href="page9.html" class="footer-link">Doing the Skything</a>
-    <span id="rightFooterIcon" class="footer-icon">🧘‍♂️</span>
+  <div class="footer">
+    <div id="leftEmoji" class="emoji">🧘</div>
+    <span>Do the Skything</span>
+    <div id="rightEmoji" class="emoji">🕺</div>
   </div>
 
   <script>
-    // Random emoji symbol for top left
-    const symbols = ['☁️', '🌞', '🕊️'];
-    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-    document.getElementById('symbolLink').textContent = symbol;
+    const emojis = ["❤️", "🕺", "💃", "🌸", "🤸", "🧘", "🌼", "🙏", "🙌"];
+    const leftEmoji = document.getElementById("leftEmoji");
+    const rightEmoji = document.getElementById("rightEmoji");
 
-    // Star generator
-    const starsContainer = document.getElementById('stars');
-    const numStars = 100;
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.animationDelay = `${Math.random() * 6}s`;
-      starsContainer.appendChild(star);
+    function randomEmoji(current) {
+      let next;
+      do {
+        next = emojis[Math.floor(Math.random() * emojis.length)];
+      } while (next === current);
+      return next;
     }
 
-    // Alternating Wingdings in footer
-    const footerIcons = ['❤️', '🕺', '🧘‍♂️', '💐', '🙌', '🤸'];
-    const left = document.getElementById('leftFooterIcon');
-    const right = document.getElementById('rightFooterIcon');
-    let i = 0;
-
+    let toggle = true;
     setInterval(() => {
-      left.textContent = footerIcons[Math.floor(Math.random() * footerIcons.length)];
-    }, 1000);
-
-    setTimeout(() => {
-      setInterval(() => {
-        right.textContent = footerIcons[Math.floor(Math.random() * footerIcons.length)];
-      }, 1000);
+      if (toggle) {
+        leftEmoji.textContent = randomEmoji(leftEmoji.textContent);
+      } else {
+        rightEmoji.textContent = randomEmoji(rightEmoji.textContent);
+      }
+      toggle = !toggle;
     }, 500);
   </script>
-
 </body>
 </html>
