@@ -35,7 +35,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding-bottom: 4rem; /* Reserve space for fixed footer */
+      padding-bottom: 4rem; /* reserve space for fixed footer */
     }
 
     h1 {
@@ -118,9 +118,9 @@
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 1.2rem 0.8rem;
       color: #00e0ff;
       z-index: 10;
     }
@@ -128,6 +128,15 @@
     .footer a {
       color: #00e0ff;
       text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      animation: strobe 1.5s infinite;
+    }
+
+    @keyframes strobe {
+      0%   { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
+      50%  { opacity: 0.7; text-shadow: 0 0 8px #00e0ff; }
+      100% { opacity: 1; text-shadow: 0 0 2px #00e0ff; }
     }
   </style>
 </head>
@@ -178,7 +187,7 @@
       starsContainer.appendChild(star);
     }
 
-    // Wingding alternator
+    // Wingdings animation
     const wingdings = [
       '❤️', '🙌', '💃', '🤸‍♂️', '🧘‍♀️', '🧘‍♂️', '🕊️', '🌸', '🪷', '🪬', '🌼', '🕉️'
     ];
