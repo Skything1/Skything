@@ -19,6 +19,7 @@
       align-items: center;
       min-height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     h1 {
@@ -76,6 +77,36 @@
     .visible {
       opacity: 1;
     }
+
+    .strobe-link {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.95rem;
+      font-weight: 300;
+      text-decoration: none;
+      background: linear-gradient(90deg, white 20%, cyan 50%, white 80%);
+      background-size: 200%;
+      background-position: 0% 0;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: strobe-left 4s linear infinite;
+    }
+
+    @keyframes strobe-left {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @keyframes strobe-right {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes strobe-center {
+      0%   { background-position: 100% 0; }
+      50%  { background-position: 0% 0; }
+      100% { background-position: 100% 0; }
+    }
   </style>
 </head>
 <body>
@@ -84,19 +115,21 @@
   <h2>Sky wide data protection</h2>
 
   <div class="spacer"></div>
-<!-- and end with -->
-<!-- /div class="subtext">Need to protect all your data on every cloud?</div>
-  </div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
-  </div class="subtext">Consider it done.</div>
 
-  </div class="cta-bold">Skything it.</div>
-  </div class="cta-skinny">Because restoring is so.. eons ago</div> -->
+  <div class="subtext">Need to protect all your data on every cloud?</div>
+  <div class="subtext">By tomorrow. No headcount.  Wait, what?</div>
+  <div class="subtext">Consider it done.</div>
+
+  <div class="cta-bold">Skything it.</div>
+  <div class="cta-skinny">Now, not eons</div>
 
   <div class="spacer"></div>
 
   <div id="line1" class="tagline-line"></div>
   <div id="line2" class="tagline-line"></div>
   <div id="line3" class="tagline-line bold"></div>
+
+  <a class="strobe-link" id="strobeLink" href="page2.html">Do the Skything</a>
 
   <script>
     const taglines = [
@@ -111,7 +144,7 @@
         "Smile, you did the Skything"
       ],
       [
-        "Two '<b>single</b>' panes of glass?!",
+        "Two single panes of glass?!",
         "Backup <b>&</b> DR in <b>one</b> place",
         "Smile, you did the Skything"
       ],
@@ -130,6 +163,7 @@
     const line1 = document.getElementById('line1');
     const line2 = document.getElementById('line2');
     const line3 = document.getElementById('line3');
+    const strobe = document.getElementById('strobeLink');
 
     let currentIndex = 0;
 
@@ -163,6 +197,13 @@
       }, 600);
     }
 
+    function randomStrobeDirection() {
+      const directions = ['strobe-left', 'strobe-right', 'strobe-center'];
+      const pick = directions[Math.floor(Math.random() * directions.length)];
+      strobe.style.animationName = pick;
+    }
+
+    setInterval(randomStrobeDirection, 6000);
     showLines();
   </script>
 
