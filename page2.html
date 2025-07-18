@@ -42,10 +42,10 @@
     }
 
     h1 {
-      font-size: 4.4rem;
-      font-weight: 600;
-      margin-top: 3rem;
-      margin-bottom: 2rem;
+      font-size: 4.6rem;
+      font-weight: 300;
+      margin-top: 2rem;
+      margin-bottom: 2.2rem;
       cursor: pointer;
     }
 
@@ -136,12 +136,12 @@
 
   <!-- Navigation links -->
   <div class="nav-links">
-    <a href="#">Products</a>
-    <a href="#">SkyOps & CloudOps</a>
-    <a href="#">Skything your AI</a>
-    <a href="#">SkyOS</a>
-    <a href="#">Blog</a>
-    <a href="#">ST_ory</a>
+    <a href="Products">Products</a>
+    <a href="SkyOps">SkyOps & CloudOps</a>
+    <a href="AIOps">Skything your AI</a>
+    <a href="SkyOS">SkyOS</a>
+    <a href="Blog">Blog</a>
+    <a href="Skythingies">Skythingies</a>
   </div>
 
   <!-- Stars background -->
@@ -150,16 +150,16 @@
   <!-- Footer -->
   <div class="footer">
     <span id="footerIconLeft" class="footer-icon">💃</span>
-    <a class="strobe-link" href="page9.html">Doing the Skything</a>
+    <a class="strobe-link" href="DoingGood">Doing the Skything</a>
     <span id="footerIconRight" class="footer-icon">🤸</span>
   </div>
 
   <script>
-    // Random rotating emoji in the top-left
+    // Random top-left emoji
     const symbols = ['☁️', '🌞', '🕊️'];
     document.getElementById('symbolLink').textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-    // Stars generation
+    // Stars
     const starsContainer = document.getElementById('stars');
     for (let i = 0; i < 100; i++) {
       const star = document.createElement('div');
@@ -170,12 +170,12 @@
       starsContainer.appendChild(star);
     }
 
-    // Alternating Wingdings for footer
+    // Alternating Wingdings
     const wingdings = ['💃', '🕺', '🫶', '🤸', '🙏', '🌸', '🧘'];
     const left = document.getElementById('footerIconLeft');
     const right = document.getElementById('footerIconRight');
-
     let i = 0;
+
     setInterval(() => {
       left.textContent = wingdings[i % wingdings.length];
       setTimeout(() => {
