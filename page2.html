@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Skything – Page 2</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
 
     body {
       margin: 0;
@@ -42,11 +42,11 @@
     }
 
     h1 {
-      font-size: 4.4rem;
-      font-weight: 300;
-      margin-top: 5.5rem; /* Increased spacing to match page 1 */
+      font-size: 4.8rem;
+      font-weight: 200;
+      margin-top: 5.8rem; /* Match page 1 spacing */
       margin-bottom: 2rem;
-      font-family: 'Inter', sans-serif;
+      cursor: pointer;
     }
 
     .nav-links {
@@ -104,19 +104,19 @@
     }
 
     .strobe-link {
-      background: linear-gradient(90deg, #66e0ff, #a1c4fd, #66e0ff);
-      background-size: 400% auto;
+      background: linear-gradient(90deg, cyan, #a1c4fd, #c2e9fb, cyan);
+      background-size: 200%;
+      background-position: 0% 0;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: strobe 4s ease-in-out infinite alternate;
+      animation: strobe 4s linear infinite alternate;
       text-decoration: none;
-      font-weight: 300;
     }
 
     @keyframes strobe {
-      0% { background-position: center right; }
-      50% { background-position: center left; }
-      100% { background-position: center right; }
+      0% { background-position: 200% 0; }
+      50% { background-position: 0% 0; }
+      100% { background-position: -200% 0; }
     }
 
     .footer-icon {
@@ -141,7 +141,7 @@
     <a href="AIOps.html">Skything your AI</a>
     <a href="SkyOS.html">SkyOS</a>
     <a href="Blog.html">Blog</a>
-    <a href="Skythingies.html">Skythingies</a>
+    <a href="Skythingies.html">ST_ory</a>
   </div>
 
   <!-- Stars background -->
@@ -149,9 +149,9 @@
 
   <!-- Footer -->
   <div class="footer">
-    <span id="footerIconLeft" class="footer-icon">🦒</span>
+    <span id="footerIconLeft" class="footer-icon">🪩</span>
     <a class="strobe-link" href="DoingGood.html">Doing the Skything</a>
-    <span id="footerIconRight" class="footer-icon">🦒</span>
+    <span id="footerIconRight" class="footer-icon">🪐</span>
   </div>
 
   <script>
@@ -170,8 +170,8 @@
       starsContainer.appendChild(star);
     }
 
-    // Alternating footer emoji
-    const wingdings = ['🦒', '🕺', '🫶', '🤸', '🙏', '🧘'];
+    // Alternating Wingdings for footer
+    const wingdings = ['💃', '🕺', '🫶', '🤸', '🙏', '🌸', '🧘'];
     const left = document.getElementById('footerIconLeft');
     const right = document.getElementById('footerIconRight');
 
