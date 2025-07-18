@@ -16,14 +16,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      overflow: hidden;
       text-align: center;
+      min-height: 100vh;
     }
 
     .symbol-link {
-      position: absolute;
+      position: fixed;
       top: 1rem;
       left: 1rem;
       background: rgba(255, 255, 255, 0.08);
@@ -35,31 +33,41 @@
       text-decoration: none;
       color: white;
       transition: transform 0.3s ease;
+      z-index: 10;
     }
 
     .symbol-link:hover {
       transform: scale(1.08);
     }
 
-    h1 {
+    .main-title {
       font-family: 'Inter', sans-serif;
       font-weight: 200;
-      font-size: 4.6rem;
-      margin-top: 7.2rem;
-      margin-bottom: 1rem;
+      font-size: 4.5rem;
+      margin-top: 8.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .subtitle {
-      font-size: 1.6rem;
+      font-size: 1.25rem;
       font-weight: 300;
       max-width: 720px;
       line-height: 1.6;
-      margin: 1rem auto 0;
+      margin: 1.2rem auto;
       opacity: 0.88;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 200;
+      margin-top: 3.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
     }
 
     .stars {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -85,11 +93,14 @@
 </head>
 <body>
 
-  <!-- Symbol link back to home -->
+  <!-- Back button -->
   <a href="index.html" class="symbol-link" id="symbolLink">☁️</a>
 
-  <!-- SkyOS title -->
-  <h1>SkyOS</h1>
+  <!-- Skything title -->
+  <div class="main-title">Skything</div>
+
+  <!-- SkyOS section header -->
+  <div class="section-title">SkyOS</div>
 
   <!-- Description -->
   <div class="subtitle">
