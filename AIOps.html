@@ -1,1 +1,140 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skything Your AI – Skything</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0d1117;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    .symbol-link {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      border-radius: 2rem;
+      padding: 0.6rem 0.9rem;
+      font-size: 1.5rem;
+      line-height: 1;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+      z-index: 10;
+    }
+
+    .symbol-link:hover {
+      transform: scale(1.08);
+    }
+
+    .main-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 200;
+      font-size: 4.5rem;
+      margin-top: 8.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      font-weight: 300;
+      max-width: 720px;
+      line-height: 1.6;
+      margin: 1.2rem auto;
+      opacity: 0.88;
+      padding: 0 1rem;
+    }
+
+    .section-title {
+      font-size: 2.3rem;
+      font-weight: 200;
+      margin-top: 3.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkle 6s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back button -->
+  <a href="page2.html" class="symbol-link" id="symbolLink">☁️</a>
+
+  <!-- Skything title -->
+  <!--<div class="main-title">Skything</div>
+
+  <!-- SkyOS section header -->
+  <div class="section-title">Skything your AI</div>
+
+  <!-- Description -->
+  <div class="subtitle">
+    SkyOS
+  </div>
+
+  <div class="subtitle">
+
+  </div>
+
+  <div class="subtitle">
+   
+  </div>
+
+  <!-- Stars background -->
+  <div class="stars" id="stars"></div>
+
+  <script>
+    // Random symbol in top-left
+    const symbols = ['☁️', '🛰️', '🪐', '🌞'];
+    document.getElementById('symbolLink').textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+    // Generate stars
+    const starsContainer = document.getElementById('stars');
+    for (let i = 0; i < 90; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 6}s`;
+      starsContainer.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
